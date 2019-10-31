@@ -1,10 +1,23 @@
 import { NEW_TILE, NEW_GAME } from '../actions/action-types';
 
-// Helper functions
-const generateCells = () => {
+const initialState = [];
+
+// Tiles ID counter
+let nextId = 0;
+
+/**
+ * Generates the initial cell grid with empty cells
+ */
+const generateGrid = () => {
   return [[null, null, null, null], [null, null, null, null], [null, null, null, null], [null, null, null, null]];
 };
 
+/**
+ * Returns the coordinates of all empty cells in the grid
+ *
+ * @param {Array} cells
+ * @returns {Array}
+ */
 const getEmptyCells = cells => {
   const emptyCells = [];
 
@@ -18,11 +31,23 @@ const getEmptyCells = cells => {
   return emptyCells;
 };
 
+/**
+ * Returns the coordinates of a random picked cell
+ *
+ * @param {Array} cells List of empty cells
+ * @returns {Array}
+ */
 const getRandomEmptyCoords = cells => {
   const emptyCells = getEmptyCells(cells);
   return emptyCells[Math.floor(Math.random() * emptyCells.length)];
 };
 
+/**
+ * Creates a new tile
+ *
+ * @param {Array} coords
+ * @returns {Object}
+ */
 const generateNewTile = coords => {
   nextId += 1;
 
@@ -34,34 +59,56 @@ const generateNewTile = coords => {
   };
 };
 
-const initialState = generateCells();
-let nextId = 0;
+/**
+ * Returns a new grid with the added tile
+ *
+ * @param {Array} grid
+ * @param {Object} tile
+ * @returns {Array}
+ */
+const addTile = (grid, tile) => {
+  const updatedGrid = grid.map((row, i) => {
+    if (i !== tile.row) {
+      return row;
+    } else {
+      return row.map((col, j) => {
+        if (j !== tile.col) {
+          return col;
+        } else {
+          return tile;
+        }
+      });
+    }
+  });
+  return updatedGrid;
+};
 
-// Reducers
-export default function(state = initialState, action) {
+// Reducer
+const tilesReducer = (state = initialState, action) => {
   switch (action.type) {
     case NEW_TILE: {
       const coords = getRandomEmptyCoords(state);
-      const newState = state.map((row, i) => {
-        if (i !== coords[0]) {
-          return row;
-        } else {
-          return row.map((col, j) => {
-            if (j !== coords[1]) {
-              return col;
-            } else {
-              return generateNewTile(coords);
-            }
-          });
-        }
-      });
+      const tile = generateNewTile(coords);
+      const newState = addTile(state, tile);
       return newState;
     }
     case NEW_GAME: {
       nextId = 0;
-      return initialState;
+      let newState = generateGrid();
+
+      let coords = getRandomEmptyCoords(newState);
+      let tile = generateNewTile(coords);
+      newState = addTile(newState, tile);
+
+      coords = getRandomEmptyCoords(newState);
+      tile = generateNewTile(coords);
+      newState = addTile(newState, tile);
+
+      return newState;
     }
     default:
       return state;
   }
-}
+};
+
+export default tilesReducer;

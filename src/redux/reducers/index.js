@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import game from './game';
-import tiles from './tiles';
-import score from './score';
+import gameReducer from './game';
+import tilesReducer from './tiles';
+import scoreReducer from './score';
 
-export default combineReducers({ game, tiles, score });
+export default combineReducers({ game: gameReducer, tiles: tilesReducer, score: scoreReducer });

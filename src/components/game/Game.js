@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Header from '../header';
-import Board from '../board';
+import Header from './header';
+import Board from './board';
 import styles from './Game.module.css';
 
 function Game() {

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { newGame } from '../../redux/actions/game';
+import { newGame } from '../../../redux/actions/game';
 import Header from './Header';
 
 function HeaderContainer() {

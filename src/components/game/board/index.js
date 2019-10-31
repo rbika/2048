@@ -3,7 +3,8 @@ import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { flatten } from 'lodash';
 
-import { newTile } from '../../redux/actions/tiles';
+import { newTile } from '../../../redux/actions/tiles';
+import { newGame } from '../../../redux/actions/game';
 import Board from './Board';
 
 function BoardContainer() {
@@ -13,8 +14,7 @@ function BoardContainer() {
   });
 
   useEffect(() => {
-    dispatch(newTile());
-    dispatch(newTile());
+    dispatch(newGame());
   }, []);
 
   const handleNewTile = useCallback(() => {

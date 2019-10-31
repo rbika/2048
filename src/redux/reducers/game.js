@@ -1,10 +1,9 @@
 import { NEW_GAME } from '../actions/action-types';
+import { GAME_STATES } from '../../constants';
 
-const initialState = {
-  win: null,
-};
+const initialState = GAME_STATES.IN_PROGRESS;
 
-export default function(state = initialState, action) {
+const gameReducer = (state = initialState, action) => {
   switch (action.type) {
     case NEW_GAME: {
       return initialState;
@@ -12,4 +11,6 @@ export default function(state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default gameReducer;

@@ -2,7 +2,7 @@ import { INCREMENT_SCORE, NEW_GAME } from '../actions/action-types';
 
 const initialState = 0;
 
-export default function(state = initialState, action) {
+const scoreReducer = (state = initialState, action) => {
   switch (action.type) {
     case INCREMENT_SCORE: {
       return state + action.payload.value;
@@ -13,4 +13,6 @@ export default function(state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default scoreReducer;

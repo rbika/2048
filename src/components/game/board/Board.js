@@ -39,9 +39,10 @@ const Tiles = props => {
     <div className={styles.TilesContainer}>
       {tiles.map(tile => {
         const positionStyles = {
-          right: tile.col * (100 + 10),
           top: tile.row * (100 + 10),
+          left: tile.col * (100 + 10),
         };
+        console.log(tile, positionStyles);
         return (
           <div className={styles.Tile} style={positionStyles}>
             {tile.value}
