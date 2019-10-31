@@ -1,18 +1,27 @@
 import React from 'react';
+
+import PropTypes from 'prop-types';
+
 import styles from './Header.module.css';
 
+const propTypes = {
+  score: PropTypes.number.isRequired,
+  onNewGameClick: PropTypes.func.isRequired,
+};
+
 function Header(props) {
-  const { score, handleNewGame } = props;
+  const { score, onNewGameClick } = props;
 
   return (
     <div className={styles.Game}>
       <header className={styles.GameHeader}>
         <p>Score: {score}</p>
         <p>Win State: </p>
-        <button onClick={handleNewGame}>New Game</button>
+        <button onClick={onNewGameClick}>New Game</button>
       </header>
     </div>
   );
 }
 
+Header.propTypes = propTypes;
 export default Header;

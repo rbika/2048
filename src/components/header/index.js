@@ -1,30 +1,19 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { updateWinState } from '../../redux/actions/game';
+import { newGame } from '../../redux/actions/game';
 import Header from './Header';
 
-function HeaderContainer(props) {
-  const { score, updateWinState } = props;
+function HeaderContainer() {
+  const dispatch = useDispatch();
+  const score = useSelector(state => state.score);
 
-  const handleNewGame = () => {
-    updateWinState(null);
-  };
+  const handleNewGame = useCallback(() => {
+    dispatch(newGame());
+  }, [dispatch]);
 
-  return <Header score={score} handleNewGame={handleNewGame} />;
+  return <Header score={score} onNewGameClick={handleNewGame} />;
 }
 
-const mapStateToProps = state => {
-  const { score } = state.game;
-  return { score };
-};
-
-const mapDispatchToProps = {
-  updateWinState,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HeaderContainer);
+export default HeaderContainer;
