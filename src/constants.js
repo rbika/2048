@@ -12,6 +12,9 @@ export const ARROWS = {
   39: RIGHT,
 };
 
+// Board
+export const GRID_SIZE = 4;
+
 // Game states
 export const GAME_STATES = {
   IN_PROGRESS: 'IN_PROGRESS',

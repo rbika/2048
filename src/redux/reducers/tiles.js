@@ -1,4 +1,5 @@
 import { NEW_TILE, NEW_GAME } from '../actions/action-types';
+import { GRID_SIZE } from '../../constants';
 
 const initialState = [];
 
@@ -9,7 +10,16 @@ let nextId = 0;
  * Generates the initial cell grid with empty cells
  */
 const generateGrid = () => {
-  return [[null, null, null, null], [null, null, null, null], [null, null, null, null], [null, null, null, null]];
+  const grid = [];
+  for (let i = 0; i < GRID_SIZE; i += 1) {
+    const row = [];
+    for (let j = 0; j < GRID_SIZE; j += 1) {
+      row.push(null);
+    }
+    grid.push(row);
+  }
+
+  return grid;
 };
 
 /**

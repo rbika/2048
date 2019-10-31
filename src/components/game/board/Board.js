@@ -2,6 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
+import { GRID_SIZE } from '../../../constants';
 import styles from './Board.module.css';
 
 const propTypes = {
@@ -10,26 +11,12 @@ const propTypes = {
 };
 
 const BoardGrid = () => {
-  return (
-    <div className={styles.BoardGrid}>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-      <div className={styles.BoardGridCell}></div>
-    </div>
-  );
+  const cells = [];
+
+  for (let i = 0; i < GRID_SIZE * GRID_SIZE; i += 1) {
+    cells.push(<div key={i} className={styles.BoardGridCell}></div>);
+  }
+  return <div className={styles.BoardGrid}>{cells}</div>;
 };
 
 const Tiles = props => {
@@ -42,7 +29,7 @@ const Tiles = props => {
           top: tile.row * (100 + 10),
           left: tile.col * (100 + 10),
         };
-        console.log(tile, positionStyles);
+
         return (
           <div className={styles.Tile} style={positionStyles}>
             {tile.value}
