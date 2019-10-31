@@ -9,7 +9,7 @@ import Board from './Board';
 function BoardContainer() {
   const dispatch = useDispatch();
   const tiles = useSelector(state => {
-    return flatten(state.tiles);
+    return flatten(state.tiles).filter(tile => tile !== null);
   });
 
   useEffect(() => {

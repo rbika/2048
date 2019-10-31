@@ -1,0 +1,45 @@
+.BoardContainer {
+  width: 450px;
+  height: 450px;
+  background-color: #b0bec5;
+  border-radius: 5px;
+  position: relative;
+}
+
+.BoardGrid {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: space-evenly;
+}
+
+.BoardGridCell {
+  width: 100px;
+  height: 100px;
+  background-color: #cfd8dc;
+  border-radius: 5px;
+}
+
+.TilesContainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: 10px;
+  right: 0;
+  left: 0;
+}
+
+.Tile {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: #fff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  font-weight: bold;
+}
