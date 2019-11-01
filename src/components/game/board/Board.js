@@ -31,7 +31,7 @@ const Tiles = props => {
         };
 
         return (
-          <div className={styles.Tile} style={positionStyles}>
+          <div key={tile.id} className={styles.Tile} style={positionStyles}>
             {tile.value}
           </div>
         );
@@ -49,17 +49,6 @@ function Board(props) {
       <Tiles tiles={tiles} />
 
       <button onClick={onNewTile}>New Tile</button>
-      {tiles.map((tile, i) => {
-        if (!tile) {
-          return <p>Empty</p>;
-        } else {
-          return (
-            <p key={tile.id}>
-              tile {tile.id} - value: {tile.value}: {tile.row}, {tile.col}
-            </p>
-          );
-        }
-      })}
     </div>
   );
 }

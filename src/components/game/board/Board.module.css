@@ -42,4 +42,5 @@
   align-items: center;
   font-size: 50px;
   font-weight: bold;
+  transition: all 0.3s;
 }

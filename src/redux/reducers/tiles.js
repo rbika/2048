@@ -1,10 +1,18 @@
-import { NEW_TILE, NEW_GAME } from '../actions/action-types';
-import { GRID_SIZE } from '../../constants';
+import { NEW_TILE, MOVE_TILES, NEW_GAME } from '../actions/action-types';
+import { GRID_SIZE, RIGHT, DOWN } from '../../constants';
 
 const initialState = [];
 
 // Tiles ID counter
 let nextId = 0;
+
+// Movement vector direction
+const VECTOR = {
+  UP: { row: -1, col: 0 },
+  DOWN: { row: 1, col: 0 },
+  LEFT: { row: 0, col: -1 },
+  RIGHT: { row: 0, col: 1 },
+};
 
 /**
  * Generates the initial cell grid with empty cells
@@ -93,6 +101,61 @@ const addTile = (grid, tile) => {
   return updatedGrid;
 };
 
+/**
+ * Returns a new grid with the new tiles positions
+ *
+ * @param {Array} grid
+ * @param {Object} direction
+ * @returns {Array}
+ */
+const moveTiles = (grid, direction) => {
+  const newGrid = generateGrid();
+  const vector = VECTOR[direction];
+  const movementAllowed = nextPos => {
+    let result = true;
+    result = result && nextPos.row >= 0;
+    result = result && nextPos.col >= 0;
+    result = result && nextPos.row < GRID_SIZE;
+    result = result && nextPos.col < GRID_SIZE;
+    result = result && newGrid[nextPos.row][nextPos.col] === null;
+    return result;
+  };
+
+  for (let i = 0; i < GRID_SIZE; i += 1) {
+    for (let j = 0; j < GRID_SIZE; j += 1) {
+      let row = i;
+      let col = j;
+
+      // Reverse row iterate tiles from bottom to top
+      if (direction === DOWN) row = GRID_SIZE - i - 1;
+
+      // Reverse col iterate tiles from right to left
+      if (direction === RIGHT) col = GRID_SIZE - j - 1;
+
+      const tile = grid[row][col];
+
+      if (tile !== null) {
+        const updatedTile = { ...tile };
+        const nextPos = {
+          row: tile.row + vector.row,
+          col: tile.col + vector.col,
+        };
+
+        while (movementAllowed(nextPos)) {
+          updatedTile.row = nextPos.row;
+          updatedTile.col = nextPos.col;
+          nextPos.row += vector.row;
+          nextPos.col += vector.col;
+        }
+
+        newGrid[updatedTile.row][updatedTile.col] = updatedTile;
+      }
+    }
+  }
+
+  return newGrid;
+};
+
 // Reducer
 const tilesReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -100,6 +163,10 @@ const tilesReducer = (state = initialState, action) => {
       const coords = getRandomEmptyCoords(state);
       const tile = generateNewTile(coords);
       const newState = addTile(state, tile);
+      return newState;
+    }
+    case MOVE_TILES: {
+      let newState = moveTiles(state, action.payload.direction);
       return newState;
     }
     case NEW_GAME: {
