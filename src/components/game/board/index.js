@@ -11,7 +11,9 @@ import Board from './Board';
 function BoardContainer() {
   const dispatch = useDispatch();
   const tiles = useSelector(state => {
-    return flatten(state.tiles).filter(tile => tile !== null);
+    return flatten(state.tiles)
+      .filter(tile => tile !== null)
+      .sort((tile1, tile2) => (tile1.id > tile2.id ? 1 : -1));
   });
 
   // Start a new game
@@ -35,6 +37,9 @@ function BoardContainer() {
     const direction = ARROWS[e.keyCode];
     if (direction) {
       dispatch(moveTiles(direction));
+      setTimeout(() => {
+        dispatch(newTile());
+      }, 100);
     }
   };
 

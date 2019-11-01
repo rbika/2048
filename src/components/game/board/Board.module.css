@@ -43,4 +43,14 @@
   font-size: 50px;
   font-weight: bold;
   transition: all 0.3s;
+  animation: newTileAnimation 0.3s;
+}
+
+@keyframes newTileAnimation {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
