@@ -1,4 +1,4 @@
-import { NEW_TILE, MOVE_TILES, NEW_GAME } from '../actions/action-types';
+import { NEW_TILE, MOVE_TILES, MERGE_TILES, NEW_GAME } from '../actions/action-types';
 import { GRID_SIZE, RIGHT, DOWN } from '../../constants';
 
 const initialState = [];
@@ -66,14 +66,17 @@ const getRandomEmptyCoords = cells => {
  * @param {Array} coords
  * @returns {Object}
  */
-const generateNewTile = coords => {
+const generateNewTile = (coords, value = null) => {
   nextId += 1;
+  const randomValue = Math.random() > 0.9 ? 4 : 2;
 
   return {
     id: nextId,
-    value: Math.random() > 0.9 ? 4 : 2,
+    value: value ? value : randomValue,
     row: coords[0],
     col: coords[1],
+    merged: false,
+    willMergeWith: null,
   };
 };
 
@@ -111,13 +114,22 @@ const addTile = (grid, tile) => {
 const moveTiles = (grid, direction) => {
   const newGrid = generateGrid();
   const vector = VECTOR[direction];
-  const movementAllowed = nextPos => {
+  const movementAllowed = (nextPos, tileValue) => {
     let result = true;
+
     result = result && nextPos.row >= 0;
     result = result && nextPos.col >= 0;
     result = result && nextPos.row < GRID_SIZE;
     result = result && nextPos.col < GRID_SIZE;
-    result = result && newGrid[nextPos.row][nextPos.col] === null;
+
+    if (result) {
+      const newPosition = newGrid[nextPos.row][nextPos.col];
+      const emptyCell = newPosition === null;
+      const sameValueCell = newPosition && newPosition.value === tileValue;
+      const unmergedCell = newPosition && !newPosition.willMergeWith;
+      result = (result && emptyCell) || (sameValueCell && unmergedCell);
+    }
+
     return result;
   };
 
@@ -141,19 +153,44 @@ const moveTiles = (grid, direction) => {
           col: tile.col + vector.col,
         };
 
-        while (movementAllowed(nextPos)) {
+        while (movementAllowed(nextPos, updatedTile.value)) {
           updatedTile.row = nextPos.row;
           updatedTile.col = nextPos.col;
+
           nextPos.row += vector.row;
           nextPos.col += vector.col;
         }
 
-        newGrid[updatedTile.row][updatedTile.col] = updatedTile;
+        if (newGrid[updatedTile.row][updatedTile.col] !== null) {
+          newGrid[updatedTile.row][updatedTile.col].willMergeWith = updatedTile;
+        } else {
+          newGrid[updatedTile.row][updatedTile.col] = updatedTile;
+        }
       }
     }
   }
-
   return newGrid;
+};
+
+/**
+ * Returns a new grid with the new merged tiles from the last move
+ *
+ * @param {Array} grid
+ * @returns {Array}
+ */
+const mergeTiles = grid => {
+  const updatedGrid = grid.map(row => {
+    return row.map(tile => {
+      if (tile && tile.willMergeWith) {
+        const coords = [tile.row, tile.col];
+        const value = tile.value * 2;
+        return generateNewTile(coords, value);
+      } else {
+        return tile;
+      }
+    });
+  });
+  return updatedGrid;
 };
 
 // Reducer
@@ -167,6 +204,10 @@ const tilesReducer = (state = initialState, action) => {
     }
     case MOVE_TILES: {
       let newState = moveTiles(state, action.payload.direction);
+      return newState;
+    }
+    case MERGE_TILES: {
+      let newState = mergeTiles(state);
       return newState;
     }
     case NEW_GAME: {

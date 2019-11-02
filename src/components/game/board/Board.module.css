@@ -42,13 +42,16 @@
   align-items: center;
   font-size: 50px;
   font-weight: bold;
-  transition: all 0.3s;
-  animation: newTileAnimation 0.3s;
+  transition: all 0.2s ease;
+  /* animation: newTileAnimation 0.2s; */
 }
 
 @keyframes newTileAnimation {
   from {
-    transform: scale(0);
+    transform: scale(1);
+  }
+  96% {
+    transform: scale(1.1);
   }
   to {
     transform: scale(1);

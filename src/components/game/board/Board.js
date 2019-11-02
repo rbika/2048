@@ -7,7 +7,6 @@ import styles from './Board.module.css';
 
 const propTypes = {
   tiles: PropTypes.array.isRequired,
-  onNewTile: PropTypes.func.isRequired,
 };
 
 const BoardGrid = () => {
@@ -41,14 +40,12 @@ const Tiles = props => {
 };
 
 function Board(props) {
-  const { tiles, onNewTile } = props;
+  const tiles = props.tiles;
 
   return (
     <div className={styles.BoardContainer}>
       <BoardGrid />
       <Tiles tiles={tiles} />
-
-      <button onClick={onNewTile}>New Tile</button>
     </div>
   );
 }
