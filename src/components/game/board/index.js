@@ -4,15 +4,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { flatten } from 'lodash';
 
 import { newTile, moveTiles, mergeTiles } from '../../../redux/actions/tiles';
-import { newGame } from '../../../redux/actions/game';
-import { ARROWS } from '../../../constants';
+import { newGame, gameOver } from '../../../redux/actions/game';
+import { ARROWS, GRID_SIZE } from '../../../constants';
 import Board from './Board';
 
-function BoardContainer() {
+const BoardContainer = () => {
   const dispatch = useDispatch();
+  const grid = useSelector(state => {
+    return state.tiles.tiles;
+  });
   const tiles = useSelector(state => {
     const tiles = [];
-
     flatten(state.tiles.tiles).forEach(tile => {
       if (tile) {
         tiles.push(tile);
@@ -37,22 +39,46 @@ function BoardContainer() {
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, []);
+  });
+
+  // Checks for avalilable moves
+  const availableMoves = () => {
+    // Checks if there are empty cells
+    if (flatten(grid).some(cell => cell === null)) return true;
+
+    // Checks if there are adajacent cells with the same value
+    let aux = false;
+    flatten(grid).forEach(tile => {
+      const { row, col, value } = tile;
+      if (row + 1 < GRID_SIZE) {
+        if (grid[row + 1][col].value === value) aux = true;
+      }
+      if (col + 1 < GRID_SIZE) {
+        if (grid[row][col + 1].value === value) aux = true;
+      }
+    });
+    return aux;
+  };
 
   const handleKeyPress = e => {
     const direction = ARROWS[e.keyCode];
+
     if (direction) {
       dispatch(moveTiles(direction));
 
-      // Wait animation finishes
-      setTimeout(() => {
-        dispatch(newTile());
-        dispatch(mergeTiles());
-      }, 200);
+      if (!availableMoves()) {
+        dispatch(gameOver());
+      } else {
+        // Wait animation finishes
+        setTimeout(() => {
+          dispatch(newTile());
+          dispatch(mergeTiles());
+        }, 200);
+      }
     }
   };
 
   return <Board tiles={tiles} />;
-}
+};
 
 export default BoardContainer;

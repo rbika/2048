@@ -1,4 +1,5 @@
 export const NEW_GAME = 'NEW_GAME';
+export const GAME_OVER = 'GAME_OVER';
 
 export const INCREMENT_SCORE = 'INCREMENT_SCORE';
 
