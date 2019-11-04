@@ -1,13 +1,11 @@
 import { NEW_TILE, MOVE_TILES, MERGE_TILES, NEW_GAME } from '../actions/action-types';
 import { GRID_SIZE, RIGHT, DOWN } from '../../constants';
+import uuid from 'uuid/v4';
 
 const initialState = {
   tiles: [],
   validLastMove: true,
 };
-
-// Tiles ID counter
-let nextId = 0;
 
 // Movement vector direction
 const VECTOR = {
@@ -70,11 +68,10 @@ const getRandomEmptyCoords = cells => {
  * @returns {Object}
  */
 const generateNewTile = (coords, value = null) => {
-  nextId += 1;
   const randomValue = Math.random() > 0.9 ? 4 : 2;
 
   return {
-    id: nextId,
+    id: uuid(),
     value: value ? value : randomValue,
     row: coords[0],
     col: coords[1],
@@ -227,7 +224,6 @@ const tilesReducer = (state = initialState, action) => {
       return newState;
     }
     case NEW_GAME: {
-      nextId = 0;
       let newGrid = generateGrid();
 
       let coords = getRandomEmptyCoords(newGrid);
