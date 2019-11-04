@@ -13,7 +13,7 @@ function BoardContainer() {
   const tiles = useSelector(state => {
     const tiles = [];
 
-    flatten(state.tiles).forEach(tile => {
+    flatten(state.tiles.tiles).forEach(tile => {
       if (tile) {
         tiles.push(tile);
 
@@ -47,10 +47,6 @@ function BoardContainer() {
       // Wait animation finishes
       setTimeout(() => {
         dispatch(newTile());
-      }, 200);
-
-      // Wait animation finishes
-      setTimeout(() => {
         dispatch(mergeTiles());
       }, 200);
     }

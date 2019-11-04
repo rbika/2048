@@ -1,7 +1,10 @@
 import { NEW_TILE, MOVE_TILES, MERGE_TILES, NEW_GAME } from '../actions/action-types';
 import { GRID_SIZE, RIGHT, DOWN } from '../../constants';
 
-const initialState = [];
+const initialState = {
+  tiles: [],
+  validLastMove: true,
+};
 
 // Tiles ID counter
 let nextId = 0;
@@ -111,9 +114,11 @@ const addTile = (grid, tile) => {
  * @param {Object} direction
  * @returns {Array}
  */
-const moveTiles = (grid, direction) => {
+const moveTiles = (state, direction) => {
   const newGrid = generateGrid();
   const vector = VECTOR[direction];
+  let validMove = false;
+
   const movementAllowed = (nextPos, tileValue) => {
     let result = true;
 
@@ -144,7 +149,7 @@ const moveTiles = (grid, direction) => {
       // Reverse col iterate tiles from right to left
       if (direction === RIGHT) col = GRID_SIZE - j - 1;
 
-      const tile = grid[row][col];
+      const tile = state.tiles[row][col];
 
       if (tile !== null) {
         const updatedTile = { ...tile };
@@ -159,6 +164,10 @@ const moveTiles = (grid, direction) => {
 
           nextPos.row += vector.row;
           nextPos.col += vector.col;
+
+          if (updatedTile.row !== tile.row || updatedTile.col !== tile.col) {
+            validMove = true;
+          }
         }
 
         if (newGrid[updatedTile.row][updatedTile.col] !== null) {
@@ -169,7 +178,7 @@ const moveTiles = (grid, direction) => {
       }
     }
   }
-  return newGrid;
+  return { newGrid, validMove };
 };
 
 /**
@@ -197,32 +206,39 @@ const mergeTiles = grid => {
 const tilesReducer = (state = initialState, action) => {
   switch (action.type) {
     case NEW_TILE: {
-      const coords = getRandomEmptyCoords(state);
+      if (!state.validLastMove) {
+        return state;
+      }
+      const coords = getRandomEmptyCoords(state.tiles);
       const tile = generateNewTile(coords);
-      const newState = addTile(state, tile);
+      const newState = { ...state, tiles: addTile(state.tiles, tile) };
       return newState;
     }
     case MOVE_TILES: {
-      let newState = moveTiles(state, action.payload.direction);
-      return newState;
+      const { newGrid, validMove } = moveTiles(state, action.payload.direction);
+      if (validMove) {
+        return { ...state, tiles: newGrid, validLastMove: validMove };
+      } else {
+        return { ...state, validLastMove: validMove };
+      }
     }
     case MERGE_TILES: {
-      let newState = mergeTiles(state);
+      let newState = { ...state, tiles: mergeTiles(state.tiles) };
       return newState;
     }
     case NEW_GAME: {
       nextId = 0;
-      let newState = generateGrid();
+      let newGrid = generateGrid();
 
-      let coords = getRandomEmptyCoords(newState);
+      let coords = getRandomEmptyCoords(newGrid);
       let tile = generateNewTile(coords);
-      newState = addTile(newState, tile);
+      newGrid = addTile(newGrid, tile);
 
-      coords = getRandomEmptyCoords(newState);
+      coords = getRandomEmptyCoords(newGrid);
       tile = generateNewTile(coords);
-      newState = addTile(newState, tile);
+      newGrid = addTile(newGrid, tile);
 
-      return newState;
+      return { ...state, tiles: newGrid };
     }
     default:
       return state;
