@@ -16,7 +16,6 @@ function Header(props) {
     <div className={styles.Game}>
       <header className={styles.GameHeader}>
         <p>Score: {score}</p>
-        <p>Win State: </p>
         <button onClick={onNewGameClick}>New Game</button>
       </header>
     </div>
