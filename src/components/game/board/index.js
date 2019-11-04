@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { flatten } from 'lodash';
@@ -9,6 +9,7 @@ import { ARROWS, GRID_SIZE } from '../../../constants';
 import Board from './Board';
 
 const BoardContainer = () => {
+  const [moving, setMoving] = useState(false);
   const dispatch = useDispatch();
   const grid = useSelector(state => {
     return state.tiles.tiles;
@@ -61,9 +62,12 @@ const BoardContainer = () => {
   };
 
   const handleKeyPress = e => {
+    if (moving) return;
+
     const direction = ARROWS[e.keyCode];
 
     if (direction) {
+      setMoving(true);
       dispatch(moveTiles(direction));
 
       if (!availableMoves()) {
@@ -71,6 +75,7 @@ const BoardContainer = () => {
       } else {
         // Wait animation finishes
         setTimeout(() => {
+          setMoving(false);
           dispatch(newTile());
           dispatch(mergeTiles());
         }, 200);
