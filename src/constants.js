@@ -18,6 +18,6 @@ export const GRID_SIZE = 4;
 // Game states
 export const GAME_STATES = {
   IN_PROGRESS: 'IN_PROGRESS',
-  WIN: 'WIN',
+  VICTORY: 'VICTORY',
   GAME_OVER: 'GAME_OVER',
 };

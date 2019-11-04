@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { flatten } from 'lodash';
 
 import { newTile, moveTiles, mergeTiles } from '../../../redux/actions/tiles';
-import { newGame, gameOver } from '../../../redux/actions/game';
+import { newGame, gameOver, victory } from '../../../redux/actions/game';
 import { ARROWS, GRID_SIZE } from '../../../constants';
 import Board from './Board';
 
@@ -34,6 +34,13 @@ const BoardContainer = () => {
     dispatch(newGame());
   }, []);
 
+  // Start a new game
+  useEffect(() => {
+    if (has2048Tile()) {
+      dispatch(victory());
+    }
+  }, [grid]);
+
   // Add keypress event listener
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);
@@ -59,6 +66,10 @@ const BoardContainer = () => {
       }
     });
     return aux;
+  };
+
+  const has2048Tile = () => {
+    return tiles.some(cell => cell.value === 8);
   };
 
   const handleKeyPress = e => {

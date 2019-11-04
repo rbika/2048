@@ -7,12 +7,12 @@ import { GAME_STATES } from '../../constants';
 import styles from './Game.module.css';
 
 function Game(props) {
-  const gameOver = props.gameState === GAME_STATES.GAME_OVER;
+  const showGameResult = props.gameState !== GAME_STATES.PLAYING;
 
   return (
     <div className={styles.Game}>
       <Header />
-      {gameOver && <GameOver />}
+      {showGameResult && <GameOver />}
 
       <Board />
     </div>
