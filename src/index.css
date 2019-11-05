@@ -5,14 +5,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 0;
-}
-
-.app {
   background-color: #faf8ef;
-  display: flex;
-  align-items: center;
-  height: 100vw;
-  height: -webkit-fill-available;
 }
 
 /* Colors variables */

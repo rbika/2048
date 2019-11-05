@@ -7,18 +7,10 @@ import store from './redux/store';
 import Game from './components/game';
 import './index.css';
 
-const App = () => {
-  return (
-    <div className="app">
-      <Game />
-    </div>
-  );
-};
-
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <App />
+      <Game />
     </React.StrictMode>
   </Provider>,
   document.getElementById('root')
