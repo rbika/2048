@@ -31,6 +31,10 @@
   left: 0;
 }
 
+.TileContainer {
+  transition: all 0.15s ease;
+}
+
 .Tile {
   position: absolute;
   width: 100px;
@@ -45,11 +49,11 @@
 }
 
 .newRandomTile {
-  animation: newRandomTileAnimation 0.1s;
+  animation: newRandomTileAnimation 0.1s ease;
 }
 
 .newMergedTile {
-  animation: newMergedTileAnimation 0.1s;
+  animation: newMergedTileAnimation 0.1s ease;
 }
 
 @keyframes newRandomTileAnimation {
