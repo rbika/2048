@@ -158,6 +158,9 @@ const moveTiles = (state, direction) => {
           col: tile.col + vector.col,
         };
 
+        updatedTile.newMerged = false;
+        updatedTile.newRandom = false;
+
         while (movementAllowed(nextPos, updatedTile.value)) {
           updatedTile.row = nextPos.row;
           updatedTile.col = nextPos.col;

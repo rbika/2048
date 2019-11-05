@@ -5,6 +5,7 @@ import { flatten } from 'lodash';
 
 import { newTile, moveTiles, mergeTiles } from '../../../redux/actions/tiles';
 import { newGame, gameOver, victory } from '../../../redux/actions/game';
+import { incrementScore } from '../../../redux/actions/score';
 import { ARROWS, GRID_SIZE } from '../../../constants';
 import Board from './Board';
 
@@ -39,6 +40,15 @@ const BoardContainer = () => {
     if (has2048Tile()) {
       dispatch(victory());
     }
+  }, [grid]);
+
+  // Update score
+  useEffect(() => {
+    tiles.forEach(tile => {
+      if (tile.newMerged) {
+        dispatch(incrementScore(tile.value));
+      }
+    });
   }, [grid]);
 
   // Add keypress event listener
