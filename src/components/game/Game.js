@@ -15,6 +15,15 @@ function Game(props) {
       {showGameResult && <GameOver />}
 
       <Board />
+
+      <p className={styles.howToPlay}>
+        <span className={styles.boldText}>HOW TO PLAY</span>: Use your arrow keys to move the tiles. When two tiles with
+        the same number touch, they merge into one!
+      </p>
+
+      <a href="#" className={styles.viewOnGithub}>
+        View on Github
+      </a>
     </div>
   );
 }

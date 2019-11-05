@@ -99,7 +99,7 @@ const BoardContainer = () => {
           setMoving(false);
           dispatch(newTile());
           dispatch(mergeTiles());
-        }, 200);
+        }, 150);
       }
     }
   };
