@@ -7,11 +7,14 @@ body {
 }
 
 /* Colors variables */
-
 :root {
+  /* Base colors */
+  --text-dark: #6f675e;
+  --text-light: #f9f6f2;
+  --primary: #bbada0;
+  --primary-btn-bg: #847363;
+
   /* Tiles colors */
-  --tile-dark-fg: #6f675e;
-  --tile-light-fg: #f9f6f2;
   --tile-2-bg: #eee4da;
   --tile-4-bg: #ede0c8;
   --tile-8-bg: #f2b179;

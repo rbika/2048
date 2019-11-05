@@ -10,7 +10,7 @@ function Game(props) {
   const showGameResult = props.gameState !== GAME_STATES.PLAYING;
 
   return (
-    <div className={styles.Game}>
+    <div className={styles.gameContainer}>
       <Header />
       {showGameResult && <GameOver />}
 

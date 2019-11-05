@@ -219,11 +219,7 @@ const tilesReducer = (state = initialState, action) => {
     }
     case MOVE_TILES: {
       const { newGrid, validMove } = moveTiles(state, action.payload.direction);
-      if (validMove) {
-        return { ...state, tiles: newGrid, validLastMove: validMove };
-      } else {
-        return { ...state, validLastMove: validMove };
-      }
+      return { ...state, tiles: newGrid, validLastMove: validMove };
     }
     case MERGE_TILES: {
       let newState = { ...state, tiles: mergeTiles(state.tiles) };

@@ -1,7 +1,7 @@
 .BoardContainer {
   width: 450px;
   height: 450px;
-  background-color: #bbada0;
+  background-color: var(--primary);
   border-radius: 5px;
   position: relative;
 }
@@ -74,55 +74,55 @@
 }
 
 .tile-2 {
-  color: var(--tile-dark-fg);
+  color: var(--text-dark);
   background: var(--tile-2-bg);
 }
 .tile-4 {
-  color: var(--tile-dark-fg);
+  color: var(--text-dark);
   background: var(--tile-4-bg);
 }
 .tile-8 {
-  color: var(--tile-light-fg);
+  color: var(--text-light);
   background: var(--tile-8-bg);
 }
 .tile-16 {
-  color: var(--tile-light-fg);
+  color: var(--text-light);
   background: var(--tile-16-bg);
 }
 .tile-32 {
-  color: var(--tile-light-fg);
+  color: var(--text-light);
   background: var(--tile-32-bg);
 }
 .tile-64 {
-  color: var(--tile-light-fg);
+  color: var(--text-light);
   background: var(--tile-64-bg);
 }
 .tile-128 {
-  color: var(--tile-light-fg);
+  color: var(--text-light);
   background: var(--tile-128-bg);
   font-size: 48px;
 }
 
 .tile-256 {
-  color: var(--tile-light-fg);
+  color: var(--text-light);
   background: var(--tile-256-bg);
   font-size: 48px;
 }
 
 .tile-512 {
-  color: var(--tile-light-fg);
+  color: var(--text-light);
   background: var(--tile-512-bg);
   font-size: 48px;
 }
 
 .tile-1024 {
-  color: var(--tile-light-fg);
+  color: var(--text-light);
   background: var(--tile-1024-bg);
   font-size: 36px;
 }
 
 .tile-2048 {
-  color: var(--tile-light-fg);
+  color: var(--text-light);
   background: var(--tile-2048-bg);
   font-size: 36px;
 }

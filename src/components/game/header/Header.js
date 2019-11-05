@@ -13,11 +13,17 @@ function Header(props) {
   const { score, onNewGameClick } = props;
 
   return (
-    <div className={styles.Game}>
-      <header className={styles.GameHeader}>
-        <p>Score: {score}</p>
-        <button onClick={onNewGameClick}>New Game</button>
-      </header>
+    <div className={styles.container}>
+      <h1 className={styles.title}>2048</h1>
+      <div className={styles.gameInfo}>
+        <div className={styles.scoreContainer}>
+          <div className={styles.scoreLabel}>Score</div>
+          <div className={styles.scoreValue}>{score}</div>
+        </div>
+        <button className={styles.newGameBtn} onClick={onNewGameClick}>
+          New Game
+        </button>
+      </div>
     </div>
   );
 }
