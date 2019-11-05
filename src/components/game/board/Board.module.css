@@ -1,7 +1,7 @@
 .BoardContainer {
   width: 450px;
   height: 450px;
-  background-color: #b0bec5;
+  background-color: #bbada0;
   border-radius: 5px;
   position: relative;
 }
@@ -18,7 +18,7 @@
 .BoardGridCell {
   width: 100px;
   height: 100px;
-  background-color: #cfd8dc;
+  background-color: hsla(30, 37%, 89%, 0.35);
   border-radius: 5px;
 }
 
@@ -35,7 +35,6 @@
   position: absolute;
   width: 100px;
   height: 100px;
-  background-color: #eceff1;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -72,4 +71,58 @@
   to {
     transform: scale(1);
   }
+}
+
+.tile-2 {
+  color: var(--tile-dark-fg);
+  background: var(--tile-2-bg);
+}
+.tile-4 {
+  color: var(--tile-dark-fg);
+  background: var(--tile-4-bg);
+}
+.tile-8 {
+  color: var(--tile-light-fg);
+  background: var(--tile-8-bg);
+}
+.tile-16 {
+  color: var(--tile-light-fg);
+  background: var(--tile-16-bg);
+}
+.tile-32 {
+  color: var(--tile-light-fg);
+  background: var(--tile-32-bg);
+}
+.tile-64 {
+  color: var(--tile-light-fg);
+  background: var(--tile-64-bg);
+}
+.tile-128 {
+  color: var(--tile-light-fg);
+  background: var(--tile-128-bg);
+  font-size: 48px;
+}
+
+.tile-256 {
+  color: var(--tile-light-fg);
+  background: var(--tile-256-bg);
+  font-size: 48px;
+}
+
+.tile-512 {
+  color: var(--tile-light-fg);
+  background: var(--tile-512-bg);
+  font-size: 48px;
+}
+
+.tile-1024 {
+  color: var(--tile-light-fg);
+  background: var(--tile-1024-bg);
+  font-size: 36px;
+}
+
+.tile-2048 {
+  color: var(--tile-light-fg);
+  background: var(--tile-2048-bg);
+  font-size: 36px;
 }

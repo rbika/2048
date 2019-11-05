@@ -33,6 +33,7 @@ const Tiles = props => {
         let classes = classNames(styles.Tile, {
           [styles.newRandomTile]: tile.newRandom,
           [styles.newMergedTile]: tile.newMerged,
+          [styles[`tile-${tile.value}`]]: true,
         });
 
         return (
