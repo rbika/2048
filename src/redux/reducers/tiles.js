@@ -69,13 +69,16 @@ const getRandomEmptyCoords = cells => {
  */
 const generateNewTile = (coords, value = null) => {
   const randomValue = Math.random() > 0.9 ? 4 : 2;
+  const newMerged = !!value;
+  const newRandom = !value;
 
   return {
     id: uuid(),
     value: value ? value : randomValue,
     row: coords[0],
     col: coords[1],
-    merged: false,
+    newMerged: newMerged,
+    newRandom: newRandom,
     willMergeWith: null,
   };
 };

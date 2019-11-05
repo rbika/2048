@@ -69,7 +69,7 @@ const BoardContainer = () => {
   };
 
   const has2048Tile = () => {
-    return tiles.some(cell => cell.value === 8);
+    return tiles.some(cell => cell.value === 2048);
   };
 
   const handleKeyPress = e => {

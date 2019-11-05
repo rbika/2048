@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import { GRID_SIZE } from '../../../constants';
 import styles from './Board.module.css';
@@ -29,8 +30,13 @@ const Tiles = props => {
           left: tile.col * (100 + 10),
         };
 
+        let classes = classNames(styles.Tile, {
+          [styles.newRandomTile]: tile.newRandom,
+          [styles.newMergedTile]: tile.newMerged,
+        });
+
         return (
-          <div key={tile.id} className={styles.Tile} style={positionStyles}>
+          <div key={tile.id} className={classes} style={positionStyles}>
             {tile.value}
           </div>
         );
