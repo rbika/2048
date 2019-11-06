@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { newGame } from '../../../redux/actions/game';
+import { newGame, keepPlaying } from '../../../redux/actions/game';
 import GameOver from './GameOver';
 
 function GameOverContainer() {
@@ -14,7 +14,18 @@ function GameOverContainer() {
     dispatch(newGame());
   }, [dispatch]);
 
-  return <GameOver score={score} gameState={gameState} onNewGameClick={handleNewGame} />;
+  const handleKeepPlaying = useCallback(() => {
+    dispatch(keepPlaying());
+  }, [dispatch]);
+
+  return (
+    <GameOver
+      score={score}
+      gameState={gameState}
+      onNewGameClick={handleNewGame}
+      onKeepPlayingClick={handleKeepPlaying}
+    />
+  );
 }
 
 export default GameOverContainer;

@@ -1,4 +1,4 @@
-import { NEW_GAME, GAME_OVER, VICTORY } from './action-types';
+import { NEW_GAME, GAME_OVER, VICTORY, KEEP_PLAYING } from './action-types';
 
 /**
  * Start a new game
@@ -19,4 +19,11 @@ export const gameOver = () => ({
  */
 export const victory = () => ({
   type: VICTORY,
+});
+
+/**
+ * Keep Playing
+ */
+export const keepPlaying = () => ({
+  type: KEEP_PLAYING,
 });

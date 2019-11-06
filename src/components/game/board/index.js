@@ -6,12 +6,13 @@ import { flatten } from 'lodash';
 import { newTile, moveTiles, mergeTiles } from '../../../redux/actions/tiles';
 import { newGame, gameOver, victory } from '../../../redux/actions/game';
 import { incrementScore } from '../../../redux/actions/score';
-import { ARROWS, GRID_SIZE, VICTORY_SCORE } from '../../../constants';
+import { ARROWS, GRID_SIZE, VICTORY_SCORE, GAME_STATES } from '../../../constants';
 import Board from './Board';
 
 const BoardContainer = () => {
   const [moving, setMoving] = useState(false);
   const dispatch = useDispatch();
+  const gameState = useSelector(state => state.game);
   const grid = useSelector(state => {
     return state.tiles.tiles;
   });
@@ -79,11 +80,12 @@ const BoardContainer = () => {
   };
 
   const has2048Tile = () => {
+    if (gameState === GAME_STATES.IN_PROGRESS_AFTER_VICTORY) return;
     return tiles.some(cell => cell.value === VICTORY_SCORE);
   };
 
   const handleKeyPress = e => {
-    if (moving) return;
+    if (moving || gameState === GAME_STATES.VICTORY || gameState === GAME_STATES.GAME_OVER) return;
 
     const direction = ARROWS[e.keyCode];
 

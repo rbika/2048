@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { GAME_STATES } from '../../../constants';
-
 import styles from './GameOver.module.css';
 
 const propTypes = {
@@ -23,21 +22,29 @@ const GameOverPanel = props => {
   );
 };
 
-const VictoryPanel = () => {
+const VictoryPanel = props => {
   return (
     <div className={styles.victoryPanel}>
-      <h1>YOU WIN</h1>
+      <h1>YOU WIN!</h1>
+      <div>
+        <button className={styles.newGameBtn} onClick={props.onKeepPlayingClick}>
+          Keep Playing
+        </button>
+        <button className={styles.newGameBtn} onClick={props.onNewGameClick}>
+          Try Again
+        </button>
+      </div>
     </div>
   );
 };
 
 function GameOver(props) {
-  const { onNewGameClick } = props;
+  const { onNewGameClick, onKeepPlayingClick } = props;
   let content = null;
   if (props.gameState === GAME_STATES.GAME_OVER) {
     content = <GameOverPanel onNewGameClick={onNewGameClick} />;
   } else if (props.gameState === GAME_STATES.VICTORY) {
-    content = <VictoryPanel />;
+    content = <VictoryPanel onNewGameClick={onNewGameClick} onKeepPlayingClick={onKeepPlayingClick} />;
   }
 
   return <div className={styles.container}>{content}</div>;
