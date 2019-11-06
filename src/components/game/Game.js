@@ -12,9 +12,11 @@ function Game(props) {
   return (
     <div className={styles.gameContainer}>
       <Header />
-      {showGameResult && <GameOver />}
 
-      <Board />
+      <div className={styles.positionRelative}>
+        <Board />
+        {showGameResult && <GameOver />}
+      </div>
 
       <p className={styles.howToPlay}>
         <span className={styles.boldText}>HOW TO PLAY</span>: Use your arrow keys to move the tiles. When two tiles with

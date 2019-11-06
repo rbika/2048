@@ -6,7 +6,7 @@ import { flatten } from 'lodash';
 import { newTile, moveTiles, mergeTiles } from '../../../redux/actions/tiles';
 import { newGame, gameOver, victory } from '../../../redux/actions/game';
 import { incrementScore } from '../../../redux/actions/score';
-import { ARROWS, GRID_SIZE } from '../../../constants';
+import { ARROWS, GRID_SIZE, VICTORY_SCORE } from '../../../constants';
 import Board from './Board';
 
 const BoardContainer = () => {
@@ -79,7 +79,7 @@ const BoardContainer = () => {
   };
 
   const has2048Tile = () => {
-    return tiles.some(cell => cell.value === 2048);
+    return tiles.some(cell => cell.value === VICTORY_SCORE);
   };
 
   const handleKeyPress = e => {

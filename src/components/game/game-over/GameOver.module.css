@@ -1,0 +1,47 @@
+.container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.gameOverPanel,
+.victoryPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: #6f675e;
+  background: rgba(255, 255, 255, 0.8);
+  animation: fadeInAnimation 1s ease;
+}
+
+.newGameBtn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: var(--primary-btn-bg);
+  border: 0;
+  color: var(--text-light);
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-left: 10px;
+  outline: 0;
+}
+
+.newGameBtn:hover {
+  opacity: 0.9;
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -15,7 +15,8 @@ export const ARROWS = {
 // Board
 export const GRID_SIZE = 4;
 
-// Game states
+// Game
+export const VICTORY_SCORE = 2048;
 export const GAME_STATES = {
   IN_PROGRESS: 'IN_PROGRESS',
   VICTORY: 'VICTORY',
