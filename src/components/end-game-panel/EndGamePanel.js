@@ -2,18 +2,18 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import { GAME_STATES } from '../../../constants';
-import styles from './GameOver.module.css';
+import { GAME_STATES } from '../../constants';
+import styles from './EndGamePanel.module.css';
 
 const propTypes = {
-  score: PropTypes.number.isRequired,
   gameState: PropTypes.string.isRequired,
   onNewGameClick: PropTypes.func.isRequired,
+  onKeepPlayingClick: PropTypes.func.isRequired,
 };
 
 const GameOverPanel = props => {
   return (
-    <div className={styles.gameOverPanel}>
+    <div className={styles.endGamePanel}>
       <h1>GAME OVER!</h1>
       <button className={styles.newGameBtn} onClick={props.onNewGameClick}>
         Try Again
@@ -24,7 +24,7 @@ const GameOverPanel = props => {
 
 const VictoryPanel = props => {
   return (
-    <div className={styles.victoryPanel}>
+    <div className={styles.endGamePanel}>
       <h1>YOU WIN!</h1>
       <div>
         <button className={styles.newGameBtn} onClick={props.onKeepPlayingClick}>
@@ -38,9 +38,10 @@ const VictoryPanel = props => {
   );
 };
 
-function GameOver(props) {
+function EndGamePanel(props) {
   const { onNewGameClick, onKeepPlayingClick } = props;
   let content = null;
+
   if (props.gameState === GAME_STATES.GAME_OVER) {
     content = <GameOverPanel onNewGameClick={onNewGameClick} />;
   } else if (props.gameState === GAME_STATES.VICTORY) {
@@ -50,5 +51,5 @@ function GameOver(props) {
   return <div className={styles.container}>{content}</div>;
 }
 
-GameOver.propTypes = propTypes;
-export default GameOver;
+EndGamePanel.propTypes = propTypes;
+export default EndGamePanel;

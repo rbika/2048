@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { flatten } from 'lodash';
 
-import { newTile, moveTiles, mergeTiles } from '../../../redux/actions/tiles';
-import { newGame, gameOver, victory } from '../../../redux/actions/game';
-import { incrementScore } from '../../../redux/actions/score';
-import { ARROWS, GRID_SIZE, VICTORY_SCORE, GAME_STATES } from '../../../constants';
+import { newTile, moveTiles, mergeTiles } from '../../redux/actions/tiles';
+import { newGame, gameOver, victory } from '../../redux/actions/game';
+import { incrementScore } from '../../redux/actions/score';
+import { ARROWS, GRID_SIZE, VICTORY_SCORE, GAME_STATES } from '../../constants';
 import Board from './Board';
 
 const BoardContainer = () => {

@@ -6,8 +6,7 @@
   bottom: 0;
 }
 
-.gameOverPanel,
-.victoryPanel {
+.endGamePanel {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,7 +18,7 @@
   animation: fadeInAnimation 1s ease;
 }
 
-.newGameBtn {
+.panelBtn {
   padding: 10px 20px;
   border-radius: 5px;
   background-color: var(--primary-btn-bg);
@@ -33,7 +32,7 @@
   outline: 0;
 }
 
-.newGameBtn:hover {
+.panelBtn:hover {
   opacity: 0.9;
 }
 

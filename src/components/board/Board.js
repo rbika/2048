@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { GRID_SIZE } from '../../../constants';
+import { GRID_SIZE } from '../../constants';
 import styles from './Board.module.css';
 
 const propTypes = {

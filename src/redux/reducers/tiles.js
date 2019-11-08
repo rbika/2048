@@ -208,6 +208,10 @@ const mergeTiles = grid => {
 // Reducer
 const tilesReducer = (state = initialState, action) => {
   switch (action.type) {
+    case NEW_GAME: {
+      let newGrid = generateGrid();
+      return { ...state, tiles: newGrid };
+    }
     case NEW_TILE: {
       if (!state.validLastMove) {
         return state;
@@ -224,19 +228,6 @@ const tilesReducer = (state = initialState, action) => {
     case MERGE_TILES: {
       let newState = { ...state, tiles: mergeTiles(state.tiles) };
       return newState;
-    }
-    case NEW_GAME: {
-      let newGrid = generateGrid();
-
-      let coords = getRandomEmptyCoords(newGrid);
-      let tile = generateNewTile(coords);
-      newGrid = addTile(newGrid, tile);
-
-      coords = getRandomEmptyCoords(newGrid);
-      tile = generateNewTile(coords);
-      newGrid = addTile(newGrid, tile);
-
-      return { ...state, tiles: newGrid };
     }
     default:
       return state;

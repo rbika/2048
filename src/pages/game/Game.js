@@ -1,13 +1,19 @@
 import React from 'react';
 
-import Header from './header';
-import Board from './board';
-import GameOver from './game-over';
+import PropTypes from 'prop-types';
+
+import Header from '../../components/header';
+import Board from '../../components/board';
+import EndGamePanel from '../../components/end-game-panel';
 import { GAME_STATES } from '../../constants';
 import styles from './Game.module.css';
 
+const propTypes = {
+  gameState: PropTypes.string.isRequired,
+};
+
 function Game(props) {
-  const showGameResult = props.gameState !== GAME_STATES.PLAYING;
+  const showEndGamePanel = props.gameState !== GAME_STATES.PLAYING;
 
   return (
     <div className={styles.gameContainer}>
@@ -15,19 +21,20 @@ function Game(props) {
 
       <div className={styles.positionRelative}>
         <Board />
-        {showGameResult && <GameOver />}
+        {showEndGamePanel && <EndGamePanel />}
       </div>
 
-      <p className={styles.howToPlay}>
+      <p className={styles.howToPlayText}>
         <span className={styles.boldText}>HOW TO PLAY</span>: Use your arrow keys to move the tiles. When two tiles with
         the same number touch, they merge into one!
       </p>
 
-      <a href="#" className={styles.viewOnGithub}>
+      <a href="#" className={styles.viewOnGithubLink}>
         View on Github
       </a>
     </div>
   );
 }
 
+Game.propTypes = propTypes;
 export default Game;

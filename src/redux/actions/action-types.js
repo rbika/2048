@@ -1,6 +1,6 @@
 export const NEW_GAME = 'NEW_GAME';
-export const GAME_OVER = 'GAME_OVER';
 export const VICTORY = 'VICTORY';
+export const GAME_OVER = 'GAME_OVER';
 export const KEEP_PLAYING = 'KEEP_PLAYING';
 
 export const RESET_SCORE = 'RESET_SCORE';

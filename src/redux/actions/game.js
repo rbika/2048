@@ -1,29 +1,29 @@
-import { NEW_GAME, GAME_OVER, VICTORY, KEEP_PLAYING } from './action-types';
+import * as actions from './action-types';
 
 /**
- * Start a new game
+ * Starts a new game
  */
 export const newGame = () => ({
-  type: NEW_GAME,
+  type: actions.NEW_GAME,
 });
 
 /**
- * Game over
+ * Ends the game when the player lose
  */
 export const gameOver = () => ({
-  type: GAME_OVER,
+  type: actions.GAME_OVER,
 });
 
 /**
- * Victory
+ * Ends the game when the player win
  */
 export const victory = () => ({
-  type: VICTORY,
+  type: actions.VICTORY,
 });
 
 /**
- * Keep Playing
+ * Allows player to keep playing after victory
  */
 export const keepPlaying = () => ({
-  type: KEEP_PLAYING,
+  type: actions.KEEP_PLAYING,
 });
