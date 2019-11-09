@@ -2,7 +2,7 @@
 
 This game is a React implementation of the [2048](<https://en.wikipedia.org/wiki/2048_(video_game)>) game.
 
-Play the game [here](#).
+Play the game [here](http://rbika.github.io/2048).
 
 ## Development environment
 

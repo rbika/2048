@@ -29,7 +29,7 @@ function Game(props) {
         the same number touch, they merge into one!
       </p>
 
-      <a href="https://github.com/rbika/2048" className={styles.viewOnGithubLink}>
+      <a href="https://github.com/rbika/2048" target="_blank" className={styles.viewOnGithubLink}>
         View on Github
       </a>
     </div>
