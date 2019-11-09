@@ -1,4 +1,4 @@
-import { INCREMENT_SCORE, NEW_GAME } from '../actions/action-types';
+import * as actions from '../actions/action-types';
 
 const initialState = {
   currentScore: 0,
@@ -6,10 +6,10 @@ const initialState = {
 
 const scoreReducer = (state = initialState, action) => {
   switch (action.type) {
-    case NEW_GAME: {
+    case actions.NEW_GAME: {
       return { ...state, currentScore: 0 };
     }
-    case INCREMENT_SCORE: {
+    case actions.INCREMENT_SCORE: {
       const newScore = state.currentScore + action.payload;
       return { ...state, currentScore: newScore };
     }

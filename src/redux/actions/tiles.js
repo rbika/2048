@@ -1,25 +1,47 @@
-import { NEW_TILE, MOVE_TILES, MERGE_TILES } from './action-types';
+import * as actions from './action-types';
+
+// Action Creators
 
 /**
- * Create a new tile with a random position
+ * Creates a new tile with a random position
  */
 export const newTile = () => ({
-  type: NEW_TILE,
+  type: actions.NEW_TILE,
 });
 
 /**
- * Move all tiles to a given direction
+ * Moves all tiles to a given direction
  *
  * @param {String} direction
  */
 export const moveTiles = direction => ({
-  type: MOVE_TILES,
-  payload: { direction },
+  type: actions.MOVE_TILES,
+  payload: direction,
 });
 
 /**
- * Merge the tiles from the last move
+ * Merges the tiles in the same cell
  */
 export const mergeTiles = () => ({
-  type: MERGE_TILES,
+  type: actions.MERGE_TILES,
+});
+
+/**
+ * Updates board grid
+ *
+ * @param {Array} grid
+ */
+export const updateGrid = grid => ({
+  type: actions.UPDATE_GRID,
+  payload: grid,
+});
+
+/**
+ * Sets if tiles are moving or not
+ *
+ * @param {Boolean} value
+ */
+export const tilesMoving = value => ({
+  type: actions.TILES_MOVING,
+  payload: value,
 });

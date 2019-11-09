@@ -1,18 +1,18 @@
-import { INCREMENT_SCORE, RESET_SCORE } from './action-types';
+import * as actions from './action-types';
 
 /**
- * Increment the current score
+ * Increments the current score
  *
  * @param {Number} value value to be incremented
  */
 export const incrementScore = value => ({
-  type: INCREMENT_SCORE,
+  type: actions.INCREMENT_SCORE,
   payload: value,
 });
 
 /**
- * Set the current score to 0 (zero)
+ * Sets the current score to 0 (zero)
  */
 export const resetScore = () => ({
-  type: RESET_SCORE,
+  type: actions.RESET_SCORE,
 });

@@ -1,4 +1,10 @@
 // Directions
+export const DIRECTIONS = {
+  UP: 'UP',
+  LEFT: 'LEFT',
+  DOWN: 'DOWN',
+  RIGHT: 'RIGHT',
+};
 export const UP = 'UP';
 export const LEFT = 'LEFT';
 export const DOWN = 'DOWN';
