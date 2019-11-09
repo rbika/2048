@@ -1,4 +1,4 @@
-.BoardContainer {
+.boardContainer {
   width: 450px;
   height: 450px;
   background-color: var(--primary);
@@ -6,7 +6,7 @@
   position: relative;
 }
 
-.BoardGrid {
+.boardGrid {
   width: 100%;
   height: 100%;
   display: flex;
@@ -15,14 +15,14 @@
   align-content: space-evenly;
 }
 
-.BoardGridCell {
+.boardGridCell {
   width: 100px;
   height: 100px;
   background-color: hsla(30, 37%, 89%, 0.35);
   border-radius: 5px;
 }
 
-.TilesContainer {
+.tilesContainer {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -31,14 +31,14 @@
   left: 0;
 }
 
-.TileContainer {
+.tileContainer {
   transition: all 0.15s ease;
   position: absolute;
   width: 100px;
   height: 100px;
 }
 
-.Tile {
+.tile {
   width: 100%;
   height: 100%;
   border-radius: 5px;
@@ -70,7 +70,7 @@
   from {
     transform: scale(1);
   }
-  95% {
+  90% {
     transform: scale(1.1);
   }
   to {
@@ -82,26 +82,32 @@
   color: var(--text-dark);
   background: var(--tile-2-bg);
 }
+
 .tile-4 {
   color: var(--text-dark);
   background: var(--tile-4-bg);
 }
+
 .tile-8 {
   color: var(--text-light);
   background: var(--tile-8-bg);
 }
+
 .tile-16 {
   color: var(--text-light);
   background: var(--tile-16-bg);
 }
+
 .tile-32 {
   color: var(--text-light);
   background: var(--tile-32-bg);
 }
+
 .tile-64 {
   color: var(--text-light);
   background: var(--tile-64-bg);
 }
+
 .tile-128 {
   color: var(--text-light);
   background: var(--tile-128-bg);

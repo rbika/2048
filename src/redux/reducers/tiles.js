@@ -3,7 +3,6 @@ import * as actions from '../actions/action-types';
 const initialState = {
   grid: [],
   tilesMoving: false,
-  validLastMove: true,
 };
 
 const tilesReducer = (state = initialState, action) => {

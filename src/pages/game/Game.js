@@ -16,7 +16,7 @@ function Game(props) {
   const showEndGamePanel = props.gameState !== GAME_STATES.PLAYING;
 
   return (
-    <div className={styles.gameContainer}>
+    <div className={styles.container}>
       <Header />
 
       <div className={styles.positionRelative}>

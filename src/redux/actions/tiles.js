@@ -1,7 +1,5 @@
 import * as actions from './action-types';
 
-// Action Creators
-
 /**
  * Creates a new tile with a random position
  */
@@ -12,7 +10,7 @@ export const newTile = () => ({
 /**
  * Moves all tiles to a given direction
  *
- * @param {String} direction
+ * @param {String} direction UP, DOWN, LEFT or RIGHT
  */
 export const moveTiles = direction => ({
   type: actions.MOVE_TILES,

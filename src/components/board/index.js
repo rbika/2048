@@ -35,7 +35,8 @@ const BoardContainer = () => {
   });
 
   const handleKeyPress = e => {
-    if (tilesMoving || gameState === GAME_STATES.VICTORY || gameState === GAME_STATES.GAME_OVER) return;
+    const endGame = gameState === GAME_STATES.VICTORY || gameState === GAME_STATES.GAME_OVER;
+    if (tilesMoving || endGame) return;
 
     const direction = ARROWS[e.keyCode];
 

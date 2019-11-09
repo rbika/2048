@@ -7,7 +7,7 @@ import { newTile, mergeTiles, updateGrid, tilesMoving } from './actions/tiles';
 import { gameOver, victory } from './actions/game';
 import { incrementScore } from './actions/score';
 import * as actions from './actions/action-types';
-import { GRID_SIZE, VICTORY_SCORE, GAME_STATES, DIRECTIONS } from '../constants';
+import { GRID_SIZE, VICTORY_TILE, GAME_STATES, DIRECTIONS } from '../constants';
 
 const sleep = ms => new Promise(res => setTimeout(res, ms));
 
@@ -299,7 +299,7 @@ const containsVictoryTile = (gameState, grid) => {
   if (gameState === GAME_STATES.IN_PROGRESS_AFTER_VICTORY) return;
   return flatten(grid)
     .filter(cell => cell)
-    .some(cell => cell.value === VICTORY_SCORE);
+    .some(cell => cell.value === VICTORY_TILE);
 };
 
 const calculateScore = grid => {

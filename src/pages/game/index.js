@@ -9,7 +9,7 @@ function GameContainer() {
   const gameState = useSelector(state => state.game.gameState);
   const dispatch = useDispatch();
 
-  // Start a new game
+  // Starts a new game
   useEffect(() => {
     dispatch(newGame());
   }, []);
