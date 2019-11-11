@@ -4,13 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { flatten } from 'lodash';
 
 import { moveTiles } from '../../redux/actions/tiles';
-import { ARROWS, GAME_STATES } from '../../constants';
+import { ARROWS } from '../../constants';
 import Board from './Board';
 
 const BoardContainer = () => {
   const dispatch = useDispatch();
-  const gameState = useSelector(state => state.game);
-  const tilesMoving = useSelector(state => state.tiles.tilesMoving);
   const tiles = useSelector(state => {
     const tiles = [];
     flatten(state.tiles.grid).forEach(tile => {
@@ -35,9 +33,6 @@ const BoardContainer = () => {
   });
 
   const handleKeyPress = e => {
-    const endGame = gameState === GAME_STATES.VICTORY || gameState === GAME_STATES.GAME_OVER;
-    if (tilesMoving || endGame) return;
-
     const direction = ARROWS[e.keyCode];
 
     if (direction) {

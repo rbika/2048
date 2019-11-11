@@ -1,6 +1,6 @@
 .boardContainer {
-  width: 450px;
-  height: 450px;
+  width: 350px;
+  height: 350px;
   background-color: var(--primary);
   border-radius: 5px;
   position: relative;
@@ -16,8 +16,8 @@
 }
 
 .boardGridCell {
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
   background-color: hsla(30, 37%, 89%, 0.35);
   border-radius: 5px;
 }
@@ -34,8 +34,8 @@
 .tileContainer {
   transition: all 0.15s ease;
   position: absolute;
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
 }
 
 .tile {
@@ -45,7 +45,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
 }
 

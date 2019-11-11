@@ -1,9 +1,10 @@
 import { put, takeEvery, all, select } from 'redux-saga/effects';
 
-import { newTile, mergeTiles, updateGrid, tilesMoving } from './actions/tiles';
+import { newTile, mergeTiles, updateGrid, setTilesMoving } from './actions/tiles';
 import { gameOver, victory } from './actions/game';
 import { incrementScore } from './actions/score';
 import * as actions from './actions/action-types';
+import { GAME_STATES } from '../constants';
 import {
   generateGrid,
   moveTiles,
@@ -43,17 +44,21 @@ function* newGameSaga() {
 
 function* moveTilesSaga() {
   function* task(action) {
-    const grid = yield select(state => state.tiles.grid);
+    const { grid, tilesMoving } = yield select(state => state.tiles);
+    const gameState = yield select(state => state.game.gameState);
     const { newGrid, validMove } = moveTiles(grid, action.payload);
+    const endGame = gameState === GAME_STATES.VICTORY || gameState === GAME_STATES.GAME_OVER;
+
+    if (tilesMoving || endGame) return;
 
     if (!availableMoves(newGrid)) {
       yield put(gameOver());
     } else if (validMove) {
-      yield put(tilesMoving(true));
+      yield put(setTilesMoving(true));
       yield put(updateGrid(newGrid));
 
       yield sleep(150);
-      yield put(tilesMoving(false));
+      yield put(setTilesMoving(false));
       yield put(mergeTiles());
 
       yield put(newTile());
@@ -66,8 +71,8 @@ function* mergeTilesSaga() {
   function* task() {
     const gameState = yield select(state => state.game.gameState);
     const grid = yield select(state => state.tiles.grid);
-    const score = calculateScore(grid);
     const updatedGrid = mergePendingTiles(grid);
+    const score = calculateScore(updatedGrid);
 
     yield put(updateGrid(updatedGrid));
     yield put(incrementScore(score));

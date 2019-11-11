@@ -39,7 +39,7 @@ export const updateGrid = grid => ({
  *
  * @param {Boolean} value
  */
-export const tilesMoving = value => ({
-  type: actions.TILES_MOVING,
+export const setTilesMoving = value => ({
+  type: actions.SET_TILES_MOVING,
   payload: value,
 });

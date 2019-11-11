@@ -1,8 +1,15 @@
 .container {
+  position: fixed;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  justify-content: center;
   display: flex;
   flex-direction: column;
-  width: 450px;
-  margin: 30px auto 0;
+  width: 350px;
+  margin: 0 auto;
+  padding: 0 5px;
 }
 
 .howToPlayText {
@@ -12,7 +19,6 @@
 }
 
 .viewOnGithubLink {
-  color: var(--text-dark);
   line-height: 1.5;
   margin: 0;
   text-align: center;

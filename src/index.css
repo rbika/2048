@@ -9,6 +9,10 @@ body {
   color: var(--text-dark);
 }
 
+a {
+  color: var(--text-dark);
+}
+
 /* Colors variables */
 :root {
   /* Base colors */

@@ -2,10 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 15px;
 }
 
 .title {
-  font-size: 72px;
+  font-size: 52px;
   margin: 0;
   color: var(--text-dark);
 }
@@ -15,9 +16,9 @@
 }
 
 .scoreContainer {
-  min-width: 100px;
+  min-width: 90px;
   text-align: center;
-  height: 60px;
+  height: 50px;
   display: flex;
   flex-direction: column;
   background-color: var(--primary);
@@ -30,24 +31,24 @@
 .scoreLabel {
   font-weight: bold;
   padding-bottom: 2px;
-  font-size: 14px;
+  font-size: 13px;
   text-transform: uppercase;
 }
 
 .scoreValue {
   font-weight: bold;
-  font-size: 26px;
+  font-size: 20px;
 }
 
 .newGameBtn {
-  width: 100px;
-  height: 60px;
+  width: 90px;
+  height: 50px;
   border-radius: 5px;
   background-color: var(--primary-btn-bg);
   border: 0;
   color: var(--text-light);
   font-weight: bold;
-  font-size: 14px;
+  font-size: 13px;
   text-transform: uppercase;
   cursor: pointer;
   margin-left: 10px;

@@ -25,13 +25,15 @@ function Game(props) {
       </div>
 
       <p className={styles.howToPlayText}>
-        <span className={styles.boldText}>HOW TO PLAY</span>: Use your arrow keys to move the tiles. When two tiles with
-        the same number touch, they merge into one!
+        <span className={styles.boldText}>HOW TO PLAY</span>: Use your arrow keys or swipe to move the tiles. When two
+        tiles with the same number touch, they merge into one!
       </p>
 
-      <a href="https://github.com/rbika/2048" target="_blank" className={styles.viewOnGithubLink}>
-        View on Github
-      </a>
+      <div className={styles.viewOnGithubLink}>
+        <a href="https://github.com/rbika/2048" target="_blank">
+          View on Github
+        </a>
+      </div>
     </div>
   );
 }

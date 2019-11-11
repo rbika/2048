@@ -7,7 +7,7 @@ const initialState = {
 
 const tilesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actions.TILES_MOVING: {
+    case actions.SET_TILES_MOVING: {
       return { ...state, tilesMoving: action.payload };
     }
     case actions.UPDATE_GRID: {

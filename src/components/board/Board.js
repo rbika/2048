@@ -26,7 +26,7 @@ const Tiles = props => {
     <div className={styles.tilesContainer}>
       {tiles.map(tile => {
         const positionStyles = {
-          transform: `translate(${tile.col * (100 + 10)}px, ${tile.row * (100 + 10)}px)`,
+          transform: `translate(${tile.col * (75 + 10)}px, ${tile.row * (75 + 10)}px)`,
         };
 
         let classes = classNames(styles.tile, {
