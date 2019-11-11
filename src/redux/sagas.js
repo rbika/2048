@@ -4,18 +4,8 @@ import { newTile, mergeTiles, updateGrid, setTilesMoving } from './actions/tiles
 import { gameOver, victory } from './actions/game';
 import { incrementScore } from './actions/score';
 import * as actions from './actions/action-types';
-import { GAME_STATES } from '../constants';
-import {
-  generateGrid,
-  moveTiles,
-  availableMoves,
-  generateNewTile,
-  getRandomEmptyCoords,
-  addTile,
-  mergePendingTiles,
-  containsVictoryTile,
-  calculateScore,
-} from '../helpers';
+import { GAME_STATES, GRID_SIZE } from '../constants';
+import * as gridUtils from '../utils/grid';
 
 const sleep = ms => new Promise(res => setTimeout(res, ms));
 
@@ -23,9 +13,8 @@ function* newTileSaga() {
   function* task() {
     const grid = yield select(state => state.tiles.grid);
     if (grid.length) {
-      const coords = getRandomEmptyCoords(grid);
-      const tile = generateNewTile(coords);
-      const updatedGrid = addTile(grid, tile);
+      const tile = gridUtils.generateRandomTile(grid);
+      const updatedGrid = gridUtils.addTile(grid, tile);
       yield put(updateGrid(updatedGrid));
     }
   }
@@ -34,7 +23,7 @@ function* newTileSaga() {
 
 function* newGameSaga() {
   function* task() {
-    const grid = generateGrid();
+    const grid = gridUtils.generateEmptyGrid(GRID_SIZE);
     yield put(updateGrid(grid));
     yield put(newTile());
     yield put(newTile());
@@ -46,12 +35,12 @@ function* moveTilesSaga() {
   function* task(action) {
     const { grid, tilesMoving } = yield select(state => state.tiles);
     const gameState = yield select(state => state.game.gameState);
-    const { newGrid, validMove } = moveTiles(grid, action.payload);
+    const { newGrid, validMove } = gridUtils.moveTiles(grid, action.payload);
     const endGame = gameState === GAME_STATES.VICTORY || gameState === GAME_STATES.GAME_OVER;
 
     if (tilesMoving || endGame) return;
 
-    if (!availableMoves(newGrid)) {
+    if (!gridUtils.hasAvailableMoves(newGrid)) {
       yield put(gameOver());
     } else if (validMove) {
       yield put(setTilesMoving(true));
@@ -71,14 +60,16 @@ function* mergeTilesSaga() {
   function* task() {
     const gameState = yield select(state => state.game.gameState);
     const grid = yield select(state => state.tiles.grid);
-    const updatedGrid = mergePendingTiles(grid);
-    const score = calculateScore(updatedGrid);
+    const updatedGrid = gridUtils.mergeTiles(grid);
+    const score = gridUtils.calculateMoveScore(updatedGrid);
 
     yield put(updateGrid(updatedGrid));
     yield put(incrementScore(score));
 
-    if (containsVictoryTile(gameState, grid)) {
-      yield put(victory());
+    if (gameState !== GAME_STATES.IN_PROGRESS_AFTER_VICTORY) {
+      if (gridUtils.hasVictoryTile(grid)) {
+        yield put(victory());
+      }
     }
   }
   yield takeEvery(actions.MERGE_TILES, task);

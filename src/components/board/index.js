@@ -15,8 +15,8 @@ const BoardContainer = () => {
       if (tile) {
         tiles.push(tile);
 
-        if (tile.willMergeWith) {
-          tiles.push(tile.willMergeWith);
+        if (tile.mergeWithTile) {
+          tiles.push(tile.mergeWithTile);
         }
       }
     });
