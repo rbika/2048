@@ -111,29 +111,29 @@
 .tile-128 {
   color: var(--text-light);
   background: var(--tile-128-bg);
-  font-size: 48px;
+  font-size: 38px;
 }
 
 .tile-256 {
   color: var(--text-light);
   background: var(--tile-256-bg);
-  font-size: 48px;
+  font-size: 38px;
 }
 
 .tile-512 {
   color: var(--text-light);
   background: var(--tile-512-bg);
-  font-size: 48px;
+  font-size: 38px;
 }
 
 .tile-1024 {
   color: var(--text-light);
   background: var(--tile-1024-bg);
-  font-size: 36px;
+  font-size: 26px;
 }
 
 .tile-2048 {
   color: var(--text-light);
   background: var(--tile-2048-bg);
-  font-size: 36px;
+  font-size: 26px;
 }
