@@ -9,11 +9,11 @@ function HeaderContainer() {
   const dispatch = useDispatch();
   const score = useSelector(state => state.score.currentScore);
 
-  const handleNewGame = useCallback(() => {
+  const handleNewGameClick = useCallback(() => {
     dispatch(newGame());
   }, [dispatch]);
 
-  return <Header score={score} onNewGameClick={handleNewGame} />;
+  return <Header score={score} onNewGameClick={handleNewGameClick} />;
 }
 
 export default HeaderContainer;

@@ -9,15 +9,21 @@ function EndGamePanelContainer() {
   const dispatch = useDispatch();
   const gameState = useSelector(state => state.game.gameState);
 
-  const handleNewGame = useCallback(() => {
+  const handleNewGameClick = useCallback(() => {
     dispatch(newGame());
   }, [dispatch]);
 
-  const handleKeepPlaying = useCallback(() => {
+  const handleKeepPlayingClick = useCallback(() => {
     dispatch(keepPlaying());
   }, [dispatch]);
 
-  return <EndGamePanel gameState={gameState} onNewGameClick={handleNewGame} onKeepPlayingClick={handleKeepPlaying} />;
+  return (
+    <EndGamePanel
+      gameState={gameState}
+      onNewGameClick={handleNewGameClick}
+      onKeepPlayingClick={handleKeepPlayingClick}
+    />
+  );
 }
 
 export default EndGamePanelContainer;
