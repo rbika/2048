@@ -4,6 +4,8 @@ This game is a React implementation of the [2048](<https://en.wikipedia.org/wiki
 
 Play the game [here](http://rbika.github.io/2048).
 
+![game screenshot](./public/game-ss.png)
+
 ## Development environment
 
 1. Clone the repository:
