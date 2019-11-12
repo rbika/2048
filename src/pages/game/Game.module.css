@@ -10,6 +10,7 @@
   width: 350px;
   margin: 0 auto;
   padding: 0 5px;
+  user-select: none;
 }
 
 .howToPlayText {
