@@ -80,60 +80,96 @@
 
 .tile-2 {
   color: var(--text-dark);
-  background: var(--tile-2-bg);
+  background-color: var(--tile-2-bg);
 }
 
 .tile-4 {
   color: var(--text-dark);
-  background: var(--tile-4-bg);
+  background-color: var(--tile-4-bg);
 }
 
 .tile-8 {
   color: var(--text-light);
-  background: var(--tile-8-bg);
+  background-color: var(--tile-8-bg);
 }
 
 .tile-16 {
   color: var(--text-light);
-  background: var(--tile-16-bg);
+  background-color: var(--tile-16-bg);
 }
 
 .tile-32 {
   color: var(--text-light);
-  background: var(--tile-32-bg);
+  background-color: var(--tile-32-bg);
 }
 
 .tile-64 {
   color: var(--text-light);
-  background: var(--tile-64-bg);
+  background-color: var(--tile-64-bg);
 }
 
 .tile-128 {
   color: var(--text-light);
-  background: var(--tile-128-bg);
+  background-color: var(--tile-128-bg);
   font-size: 38px;
 }
 
 .tile-256 {
   color: var(--text-light);
-  background: var(--tile-256-bg);
+  background-color: var(--tile-256-bg);
   font-size: 38px;
 }
 
 .tile-512 {
   color: var(--text-light);
-  background: var(--tile-512-bg);
+  background-color: var(--tile-512-bg);
   font-size: 38px;
 }
 
 .tile-1024 {
   color: var(--text-light);
-  background: var(--tile-1024-bg);
+  background-color: var(--tile-1024-bg);
   font-size: 26px;
 }
 
 .tile-2048 {
   color: var(--text-light);
-  background: var(--tile-2048-bg);
+  background-color: var(--tile-2048-bg);
   font-size: 26px;
+}
+
+.tile-4096 {
+  color: var(--text-light);
+  background-color: var(--tile-4096-bg);
+  font-size: 26px;
+}
+
+.tile-8192 {
+  color: var(--text-light);
+  background-color: var(--tile-8192-bg);
+  font-size: 26px;
+}
+
+.tile-16384 {
+  color: var(--text-light);
+  background-color: var(--tile-16384-bg);
+  font-size: 26px;
+}
+
+.tile-32768 {
+  color: var(--text-light);
+  background-color: var(--tile-32768-bg);
+  font-size: 23px;
+}
+
+.tile-65536 {
+  color: var(--text-light);
+  background-color: var(--tile-65536-bg);
+  font-size: 23px;
+}
+
+.tile-131072 {
+  color: var(--text-light);
+  background-color: var(--tile-131072-bg);
+  font-size: 20px;
 }

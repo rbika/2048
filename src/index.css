@@ -32,4 +32,10 @@ a {
   --tile-512-bg: #edc850;
   --tile-1024-bg: #edc53f;
   --tile-2048-bg: #edc22e;
+  --tile-4096-bg: #6cb3d1;
+  --tile-8192-bg: #5aa0db;
+  --tile-16384-bg: #297cb8;
+  --tile-32768-bg: #5ebb83;
+  --tile-65536-bg: #3ca967;
+  --tile-131072-bg: #1f904c;
 }
