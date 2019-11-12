@@ -1,6 +1,6 @@
 import uuid from 'uuid/v4';
 
-import { GRID_SIZE, DIRECTIONS, VICTORY_TILE } from '../constants';
+import { DIRECTIONS, VICTORY_TILE } from '../constants';
 
 // Movement vector direction
 const VECTOR = {
@@ -34,80 +34,87 @@ export const generateEmptyGrid = gridSize => {
 };
 
 /**
+ * Checks if the tile can be moved to the specified position
+ *
+ * @param {{row: number, col: number}} nextPos Coords of new position
+ * @param {number[][]} grid Grid with the moved tiles
+ * @param {string} tileValue Value of the tile being moved
+ * @returns {number[][]}
+ */
+export const isValidMove = (nextPos, grid, tileValue) => {
+  const isInsideRow = nextPos.row >= 0 && nextPos.row < grid.length;
+  const isInsideCol = nextPos.col >= 0 && nextPos.col < grid.length;
+  const isInsideGrid = isInsideRow && isInsideCol;
+
+  if (!isInsideGrid) {
+    return false;
+  }
+
+  const nextCell = grid[nextPos.row][nextPos.col];
+  const emptyCell = nextCell === null;
+  const sameValueCell = nextCell && nextCell.value === tileValue;
+  const unmergedCell = nextCell && !nextCell.mergeWithTile;
+
+  return emptyCell || (sameValueCell && unmergedCell);
+};
+
+/**
  * Returns a grid with moved tiles
  *
  * @param {number[][]} grid
  * @param {string} direction
- * @returns {number[][]}
+ * @returns {{newGrid: number[][], gridChanged: boolean}}
  */
 export const moveTiles = (grid, direction) => {
-  const newGrid = generateEmptyGrid(GRID_SIZE);
+  const gridSize = grid.length;
+  const newGrid = generateEmptyGrid(gridSize);
   const vector = VECTOR[direction];
-  let validMove = false;
+  let gridChanged = false;
 
-  const movementAllowed = (nextPos, tileValue) => {
-    let result = true;
-
-    result = result && nextPos.row >= 0;
-    result = result && nextPos.col >= 0;
-    result = result && nextPos.row < GRID_SIZE;
-    result = result && nextPos.col < GRID_SIZE;
-
-    if (result) {
-      const newPosition = newGrid[nextPos.row][nextPos.col];
-      const emptyCell = newPosition === null;
-      const sameValueCell = newPosition && newPosition.value === tileValue;
-      const unmergedCell = newPosition && !newPosition.mergeWithTile;
-      result = (result && emptyCell) || (sameValueCell && unmergedCell);
-    }
-
-    return result;
-  };
-
-  for (let i = 0; i < GRID_SIZE; i += 1) {
-    for (let j = 0; j < GRID_SIZE; j += 1) {
+  for (let i = 0; i < gridSize; i += 1) {
+    for (let j = 0; j < gridSize; j += 1) {
       let row = i;
       let col = j;
 
       // Reverse row iterate tiles from bottom to top
-      if (direction === DIRECTIONS.DOWN) row = GRID_SIZE - i - 1;
+      if (direction === DIRECTIONS.DOWN) row = gridSize - i - 1;
 
       // Reverse col iterate tiles from right to left
-      if (direction === DIRECTIONS.RIGHT) col = GRID_SIZE - j - 1;
+      if (direction === DIRECTIONS.RIGHT) col = gridSize - j - 1;
 
       const tile = grid[row][col];
 
       if (tile !== null) {
-        const updatedTile = { ...tile };
+        const movedTile = { ...tile };
         const nextPos = {
           row: tile.row + vector.row,
           col: tile.col + vector.col,
         };
 
-        updatedTile.newMerged = false;
-        updatedTile.newRandom = false;
+        movedTile.newMerged = false;
+        movedTile.newRandom = false;
 
-        while (movementAllowed(nextPos, updatedTile.value)) {
-          updatedTile.row = nextPos.row;
-          updatedTile.col = nextPos.col;
+        while (isValidMove(nextPos, newGrid, movedTile.value)) {
+          movedTile.row = nextPos.row;
+          movedTile.col = nextPos.col;
 
           nextPos.row += vector.row;
           nextPos.col += vector.col;
 
-          if (updatedTile.row !== tile.row || updatedTile.col !== tile.col) {
-            validMove = true;
+          if (movedTile.row !== tile.row || movedTile.col !== tile.col) {
+            gridChanged = true;
           }
         }
 
-        if (newGrid[updatedTile.row][updatedTile.col] !== null) {
-          newGrid[updatedTile.row][updatedTile.col].mergeWithTile = updatedTile;
+        if (newGrid[movedTile.row][movedTile.col] !== null) {
+          newGrid[movedTile.row][movedTile.col].mergeWithTile = movedTile;
         } else {
-          newGrid[updatedTile.row][updatedTile.col] = updatedTile;
+          newGrid[movedTile.row][movedTile.col] = movedTile;
         }
       }
     }
   }
-  return { newGrid, validMove };
+  return { newGrid, gridChanged };
 };
 
 /**

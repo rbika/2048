@@ -36,4 +36,10 @@
   .container {
     transform: scale(1.2);
   }
+
+  .howToPlayText,
+  .viewOnGithubLink {
+    font-size: 14px;
+    line-height: 1.3;
+  }
 }

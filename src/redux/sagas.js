@@ -35,14 +35,14 @@ function* moveTilesSaga() {
   function* task(action) {
     const { grid, tilesMoving } = yield select(state => state.tiles);
     const gameState = yield select(state => state.game.gameState);
-    const { newGrid, validMove } = gridUtils.moveTiles(grid, action.payload);
+    const { newGrid, gridChanged } = gridUtils.moveTiles(grid, action.payload);
     const endGame = gameState === GAME_STATES.VICTORY || gameState === GAME_STATES.GAME_OVER;
 
     if (tilesMoving || endGame) return;
 
     if (!gridUtils.hasAvailableMoves(newGrid)) {
       yield put(gameOver());
-    } else if (validMove) {
+    } else if (gridChanged) {
       yield put(setTilesMoving(true));
       yield put(updateGrid(newGrid));
 
