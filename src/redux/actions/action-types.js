@@ -2,6 +2,7 @@ export const NEW_GAME = 'NEW_GAME';
 export const VICTORY = 'VICTORY';
 export const GAME_OVER = 'GAME_OVER';
 export const KEEP_PLAYING = 'KEEP_PLAYING';
+export const CHECK_END_GAME = 'CHECK_END_GAME';
 
 export const RESET_SCORE = 'RESET_SCORE';
 export const INCREMENT_SCORE = 'INCREMENT_SCORE';

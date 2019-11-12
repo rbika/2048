@@ -27,3 +27,10 @@ export const victory = () => ({
 export const keepPlaying = () => ({
   type: actions.KEEP_PLAYING,
 });
+
+/**
+ * Checks if the player won or lost
+ */
+export const checkEndGame = () => ({
+  type: actions.CHECK_END_GAME,
+});

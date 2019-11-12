@@ -1,7 +1,7 @@
 import { put, takeEvery, all, select } from 'redux-saga/effects';
 
 import { newTile, mergeTiles, updateGrid, setTilesMoving } from './actions/tiles';
-import { gameOver, victory } from './actions/game';
+import { gameOver, victory, checkEndGame } from './actions/game';
 import { incrementScore } from './actions/score';
 import * as actions from './actions/action-types';
 import { GAME_STATES, GRID_SIZE } from '../constants';
@@ -40,9 +40,7 @@ function* moveTilesSaga() {
 
     if (tilesMoving || endGame) return;
 
-    if (!gridUtils.hasAvailableMoves(newGrid)) {
-      yield put(gameOver());
-    } else if (gridChanged) {
+    if (gridChanged) {
       yield put(setTilesMoving(true));
       yield put(updateGrid(newGrid));
 
@@ -51,6 +49,7 @@ function* moveTilesSaga() {
       yield put(mergeTiles());
 
       yield put(newTile());
+      yield put(checkEndGame());
     }
   }
   yield takeEvery(actions.MOVE_TILES, task);
@@ -58,23 +57,34 @@ function* moveTilesSaga() {
 
 function* mergeTilesSaga() {
   function* task() {
-    const gameState = yield select(state => state.game.gameState);
     const grid = yield select(state => state.tiles.grid);
     const updatedGrid = gridUtils.mergeTiles(grid);
     const score = gridUtils.calculateMoveScore(updatedGrid);
 
     yield put(updateGrid(updatedGrid));
     yield put(incrementScore(score));
+  }
+  yield takeEvery(actions.MERGE_TILES, task);
+}
+
+function* checkEndGameSaga() {
+  function* task() {
+    const grid = yield select(state => state.tiles.grid);
+    const gameState = yield select(state => state.game.gameState);
 
     if (gameState !== GAME_STATES.IN_PROGRESS_AFTER_VICTORY) {
       if (gridUtils.hasVictoryTile(grid)) {
         yield put(victory());
       }
     }
+
+    if (!gridUtils.hasAvailableMoves(grid)) {
+      yield put(gameOver());
+    }
   }
-  yield takeEvery(actions.MERGE_TILES, task);
+  yield takeEvery(actions.CHECK_END_GAME, task);
 }
 
 export default function* rootSaga() {
-  yield all([newGameSaga(), moveTilesSaga(), mergeTilesSaga(), newTileSaga()]);
+  yield all([newGameSaga(), moveTilesSaga(), mergeTilesSaga(), newTileSaga(), checkEndGameSaga()]);
 }
