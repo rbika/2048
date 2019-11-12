@@ -6,6 +6,8 @@ export const CHECK_END_GAME = 'CHECK_END_GAME';
 
 export const RESET_SCORE = 'RESET_SCORE';
 export const INCREMENT_SCORE = 'INCREMENT_SCORE';
+export const UPDATE_BEST_SCORE = 'UPDATE_BEST_SCORE';
+export const GET_BEST_SCORE = 'GET_BEST_SCORE';
 
 export const NEW_TILE = 'NEW_TILE';
 export const MOVE_TILES = 'MOVE_TILES';

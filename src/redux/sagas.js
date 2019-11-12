@@ -2,7 +2,7 @@ import { put, takeEvery, all, select } from 'redux-saga/effects';
 
 import { newTile, mergeTiles, updateGrid, setTilesMoving } from './actions/tiles';
 import { gameOver, victory, checkEndGame } from './actions/game';
-import { incrementScore } from './actions/score';
+import { incrementScore, updateBestScore } from './actions/score';
 import * as actions from './actions/action-types';
 import { GAME_STATES, GRID_SIZE } from '../constants';
 import * as gridUtils from '../utils/grid';
@@ -71,20 +71,50 @@ function* checkEndGameSaga() {
   function* task() {
     const grid = yield select(state => state.tiles.grid);
     const gameState = yield select(state => state.game.gameState);
+    const { currentScore, bestScore } = yield select(state => state.score);
 
     if (gameState !== GAME_STATES.IN_PROGRESS_AFTER_VICTORY) {
       if (gridUtils.hasVictoryTile(grid)) {
         yield put(victory());
+        yield put(updateBestScore(Math.max(currentScore, bestScore)));
       }
     }
 
     if (!gridUtils.hasAvailableMoves(grid)) {
       yield put(gameOver());
+      yield put(updateBestScore(Math.max(currentScore, bestScore)));
     }
   }
   yield takeEvery(actions.CHECK_END_GAME, task);
 }
 
+function* updateBestScoreSaga() {
+  function* task() {
+    const bestScore = yield select(state => state.score.bestScore);
+    localStorage.setItem('bestScore', bestScore);
+  }
+  yield takeEvery(actions.UPDATE_BEST_SCORE, task);
+}
+
+function* getBestScoreSaga() {
+  function* task() {
+    const bestScore = localStorage.getItem('bestScore');
+
+    if (bestScore) {
+      yield put(updateBestScore(parseInt(bestScore)));
+    }
+  }
+  yield takeEvery(actions.GET_BEST_SCORE, task);
+}
+
 export default function* rootSaga() {
-  yield all([newGameSaga(), moveTilesSaga(), mergeTilesSaga(), newTileSaga(), checkEndGameSaga()]);
+  yield all([
+    newGameSaga(),
+    moveTilesSaga(),
+    mergeTilesSaga(),
+    newTileSaga(),
+    checkEndGameSaga(),
+    updateBestScoreSaga(),
+    getBestScoreSaga(),
+  ]);
 }

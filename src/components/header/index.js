@@ -7,13 +7,13 @@ import Header from './Header';
 
 function HeaderContainer() {
   const dispatch = useDispatch();
-  const score = useSelector(state => state.score.currentScore);
+  const { currentScore, bestScore } = useSelector(state => state.score);
 
   const handleNewGameClick = useCallback(() => {
     dispatch(newGame());
   }, [dispatch]);
 
-  return <Header score={score} onNewGameClick={handleNewGameClick} />;
+  return <Header score={currentScore} bestScore={bestScore} onNewGameClick={handleNewGameClick} />;
 }
 
 export default HeaderContainer;
