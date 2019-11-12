@@ -11,7 +11,7 @@ Play the game [here](http://rbika.github.io/2048).
 1. Clone the repository:
 
 ```
-git clone
+git clone https://github.com/rbika/2048.git
 ```
 
 1. Change directory:
