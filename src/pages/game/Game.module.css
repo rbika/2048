@@ -22,7 +22,22 @@
 .viewOnGithubLink {
   font-size: 13px;
   margin: 0;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.viewOnGithubLink:hover {
+  opacity: 1;
+}
+
+.githubLogo {
+  width: 15px;
+  height: 15px;
+  margin: 0 4px 1px 0;
+  fill: var(--text-dark);
 }
 
 .positionRelative {

@@ -6,6 +6,7 @@ import Header from '../../components/header';
 import Board from '../../components/board';
 import EndGamePanel from '../../components/end-game-panel';
 import { GAME_STATES } from '../../constants';
+import { ReactComponent as GithubLogo } from '../../assets/github.svg';
 import styles from './Game.module.css';
 
 const propTypes = {
@@ -29,8 +30,9 @@ function Game(props) {
         tiles with the same number touch, they merge into one!
       </p>
 
-      <div className={styles.viewOnGithubLink}>
-        <a href="https://github.com/rbika/2048" target="_blank">
+      <div>
+        <a href="https://github.com/rbika/2048" className={styles.viewOnGithubLink} target="_blank">
+          <GithubLogo className={styles.githubLogo} />
           View on Github
         </a>
       </div>
