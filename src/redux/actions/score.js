@@ -5,7 +5,7 @@ import * as actions from './action-types';
  *
  * @param {number} value value to be incremented
  */
-export const incrementScore = value => ({
+export const incrementScore = (value) => ({
   type: actions.INCREMENT_SCORE,
   payload: value,
 });
@@ -22,7 +22,7 @@ export const resetScore = () => ({
  *
  * @param {number} value
  */
-export const updateBestScore = value => ({
+export const updateBestScore = (value) => ({
   type: actions.UPDATE_BEST_SCORE,
   payload: value,
 });

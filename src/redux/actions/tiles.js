@@ -12,7 +12,7 @@ export const newTile = () => ({
  *
  * @param {String} direction UP, DOWN, LEFT or RIGHT
  */
-export const moveTiles = direction => ({
+export const moveTiles = (direction) => ({
   type: actions.MOVE_TILES,
   payload: direction,
 });
@@ -29,7 +29,7 @@ export const mergeTiles = () => ({
  *
  * @param {Array} grid
  */
-export const updateGrid = grid => ({
+export const updateGrid = (grid) => ({
   type: actions.UPDATE_GRID,
   payload: grid,
 });
@@ -39,7 +39,7 @@ export const updateGrid = grid => ({
  *
  * @param {Boolean} value
  */
-export const setTilesMoving = value => ({
+export const setTilesMoving = (value) => ({
   type: actions.SET_TILES_MOVING,
   payload: value,
 });

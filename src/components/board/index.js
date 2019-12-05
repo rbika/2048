@@ -9,9 +9,9 @@ import Board from './Board';
 
 const BoardContainer = () => {
   const dispatch = useDispatch();
-  const tiles = useSelector(state => {
+  const tiles = useSelector((state) => {
     const tiles = [];
-    flatten(state.tiles.grid).forEach(tile => {
+    flatten(state.tiles.grid).forEach((tile) => {
       if (tile) {
         tiles.push(tile);
 
@@ -32,7 +32,7 @@ const BoardContainer = () => {
     };
   });
 
-  const handleKeyPress = e => {
+  const handleKeyPress = (e) => {
     const direction = ARROWS[e.keyCode];
 
     if (direction) {

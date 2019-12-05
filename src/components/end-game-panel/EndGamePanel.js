@@ -11,32 +11,28 @@ const propTypes = {
   onKeepPlayingClick: PropTypes.func.isRequired,
 };
 
-const GameOverPanel = props => {
-  return (
-    <div className={styles.endGamePanel}>
-      <h1>GAME OVER!</h1>
-      <button className={styles.panelBtn} onClick={props.onNewGameClick}>
+const GameOverPanel = (props) => (
+  <div className={styles.endGamePanel}>
+    <h1>GAME OVER!</h1>
+    <button className={styles.panelBtn} onClick={props.onNewGameClick}>
         Try Again
+    </button>
+  </div>
+);
+
+const VictoryPanel = (props) => (
+  <div className={styles.endGamePanel}>
+    <h1>YOU WIN!</h1>
+    <div>
+      <button className={styles.panelBtn} onClick={props.onKeepPlayingClick}>
+          Keep Playing
+      </button>
+      <button className={styles.panelBtn} onClick={props.onNewGameClick}>
+          Try Again
       </button>
     </div>
-  );
-};
-
-const VictoryPanel = props => {
-  return (
-    <div className={styles.endGamePanel}>
-      <h1>YOU WIN!</h1>
-      <div>
-        <button className={styles.panelBtn} onClick={props.onKeepPlayingClick}>
-          Keep Playing
-        </button>
-        <button className={styles.panelBtn} onClick={props.onNewGameClick}>
-          Try Again
-        </button>
-      </div>
-    </div>
-  );
-};
+  </div>
+);
 
 function EndGamePanel(props) {
   const { onNewGameClick, onKeepPlayingClick } = props;

@@ -10,7 +10,7 @@ import Game from './Game';
 import { getBestScore } from '../../redux/actions/score';
 
 function GameContainer() {
-  const gameState = useSelector(state => state.game.gameState);
+  const gameState = useSelector((state) => state.game.gameState);
   const dispatch = useDispatch();
 
   // Starts a new game
@@ -23,7 +23,7 @@ function GameContainer() {
     dispatch(getBestScore());
   }, []);
 
-  const handleSwipe = e => {
+  const handleSwipe = (e) => {
     const direction = DIRECTIONS[e.dir.toUpperCase()];
 
     if (direction) {

@@ -22,7 +22,7 @@ export const TILE_ORIGINS = {
  * @param {number} gridSize
  * @returns {number[][]}
  */
-export const generateEmptyGrid = gridSize => {
+export const generateEmptyGrid = (gridSize) => {
   const grid = [];
 
   for (let i = 0; i < gridSize; i += 1) {
@@ -123,12 +123,12 @@ export const moveTiles = (grid, direction) => {
  * @param {number[][]} grid
  * @returns {boolean}
  */
-export const hasAvailableMoves = grid => {
+export const hasAvailableMoves = (grid) => {
   const flatGrid = grid.flat();
   const gridSize = grid.length;
 
   // Checks if there are any empty cell
-  if (flatGrid.some(cell => cell === null)) {
+  if (flatGrid.some((cell) => cell === null)) {
     return true;
   }
 
@@ -179,7 +179,7 @@ export const generateTile = (row, col, value, origin) => {
  * @param {number[][]} grid
  * @returns {Object}
  */
-export const generateRandomTile = grid => {
+export const generateRandomTile = (grid) => {
   const randomValue = Math.random() > 0.9 ? 4 : 2;
   const { row, col } = getRandomEmptyCell(grid);
   return generateTile(row, col, randomValue, TILE_ORIGINS.MOVE);
@@ -191,7 +191,7 @@ export const generateRandomTile = grid => {
  * @param {number[][]} grid
  * @returns {{row: number, col: number}[]}
  */
-export const getEmptyCells = grid => {
+export const getEmptyCells = (grid) => {
   const emptyCells = [];
 
   grid.forEach((row, i) => {
@@ -210,7 +210,7 @@ export const getEmptyCells = grid => {
  * @param {number[][]} grid
  * @returns {{row: number, col: number}}
  */
-export const getRandomEmptyCell = grid => {
+export const getRandomEmptyCell = (grid) => {
   const emptyCells = getEmptyCells(grid);
   return emptyCells[Math.floor(Math.random() * emptyCells.length)];
 };
@@ -226,15 +226,13 @@ export const addTile = (grid, tile) => {
   const updatedGrid = grid.map((row, i) => {
     if (i !== tile.row) {
       return row;
-    } else {
-      return row.map((col, j) => {
-        if (j !== tile.col) {
-          return col;
-        } else {
-          return tile;
-        }
-      });
     }
+    return row.map((col, j) => {
+      if (j !== tile.col) {
+        return col;
+      }
+      return tile;
+    });
   });
 
   return updatedGrid;
@@ -246,17 +244,14 @@ export const addTile = (grid, tile) => {
  * @param {number[][]} grid
  * @returns {number[][]}
  */
-export const mergeTiles = grid => {
-  const updatedGrid = grid.map(row => {
-    return row.map(tile => {
-      if (tile && tile.mergeWithTile) {
-        const { row, col, value } = tile;
-        return generateTile(row, col, value * 2, TILE_ORIGINS.MERGE);
-      } else {
-        return tile;
-      }
-    });
-  });
+export const mergeTiles = (grid) => {
+  const updatedGrid = grid.map((row) => row.map((tile) => {
+    if (tile && tile.mergeWithTile) {
+      const { row, col, value } = tile;
+      return generateTile(row, col, value * 2, TILE_ORIGINS.MERGE);
+    }
+    return tile;
+  }));
 
   return updatedGrid;
 };
@@ -267,12 +262,10 @@ export const mergeTiles = grid => {
  * @param {number[][]} grid
  * @returns {boolean}
  */
-export const hasVictoryTile = grid => {
-  return grid
-    .flat()
-    .filter(cell => cell !== null)
-    .some(cell => cell.value === VICTORY_TILE);
-};
+export const hasVictoryTile = (grid) => grid
+  .flat()
+  .filter((cell) => cell !== null)
+  .some((cell) => cell.value === VICTORY_TILE);
 
 /**
  * Calculates the score of the last move
@@ -280,10 +273,8 @@ export const hasVictoryTile = grid => {
  * @param {number[][]} grid
  * @returns {number}
  */
-export const calculateMoveScore = grid => {
-  const tiles = grid.flat().filter(cell => cell !== null);
-  const reducer = (score, tile) => {
-    return tile.newMerged ? score + tile.value : score;
-  };
+export const calculateMoveScore = (grid) => {
+  const tiles = grid.flat().filter((cell) => cell !== null);
+  const reducer = (score, tile) => (tile.newMerged ? score + tile.value : score);
   return tiles.reduce(reducer, 0);
 };

@@ -1,17 +1,21 @@
-import { put, takeEvery, all, select } from 'redux-saga/effects';
+import {
+  put, takeEvery, all, select,
+} from 'redux-saga/effects';
 
-import { newTile, mergeTiles, updateGrid, setTilesMoving } from './actions/tiles';
+import {
+  newTile, mergeTiles, updateGrid, setTilesMoving,
+} from './actions/tiles';
 import { gameOver, victory, checkEndGame } from './actions/game';
 import { incrementScore, updateBestScore } from './actions/score';
 import * as actions from './actions/action-types';
 import { GAME_STATES, GRID_SIZE } from '../constants';
 import * as gridUtils from '../utils/grid';
 
-const sleep = ms => new Promise(res => setTimeout(res, ms));
+const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
 function* newTileSaga() {
   function* task() {
-    const grid = yield select(state => state.tiles.grid);
+    const grid = yield select((state) => state.tiles.grid);
     if (grid.length) {
       const tile = gridUtils.generateRandomTile(grid);
       const updatedGrid = gridUtils.addTile(grid, tile);
@@ -33,8 +37,8 @@ function* newGameSaga() {
 
 function* moveTilesSaga() {
   function* task(action) {
-    const { grid, tilesMoving } = yield select(state => state.tiles);
-    const gameState = yield select(state => state.game.gameState);
+    const { grid, tilesMoving } = yield select((state) => state.tiles);
+    const gameState = yield select((state) => state.game.gameState);
     const { newGrid, gridChanged } = gridUtils.moveTiles(grid, action.payload);
     const endGame = gameState === GAME_STATES.VICTORY || gameState === GAME_STATES.GAME_OVER;
 
@@ -57,7 +61,7 @@ function* moveTilesSaga() {
 
 function* mergeTilesSaga() {
   function* task() {
-    const grid = yield select(state => state.tiles.grid);
+    const grid = yield select((state) => state.tiles.grid);
     const updatedGrid = gridUtils.mergeTiles(grid);
     const score = gridUtils.calculateMoveScore(updatedGrid);
 
@@ -69,9 +73,9 @@ function* mergeTilesSaga() {
 
 function* checkEndGameSaga() {
   function* task() {
-    const grid = yield select(state => state.tiles.grid);
-    const gameState = yield select(state => state.game.gameState);
-    const { currentScore, bestScore } = yield select(state => state.score);
+    const grid = yield select((state) => state.tiles.grid);
+    const gameState = yield select((state) => state.game.gameState);
+    const { currentScore, bestScore } = yield select((state) => state.score);
 
     if (gameState !== GAME_STATES.IN_PROGRESS_AFTER_VICTORY) {
       if (gridUtils.hasVictoryTile(grid)) {
@@ -90,7 +94,7 @@ function* checkEndGameSaga() {
 
 function* updateBestScoreSaga() {
   function* task() {
-    const bestScore = yield select(state => state.score.bestScore);
+    const bestScore = yield select((state) => state.score.bestScore);
     localStorage.setItem('bestScore', bestScore);
   }
   yield takeEvery(actions.UPDATE_BEST_SCORE, task);

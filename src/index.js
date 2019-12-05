@@ -13,5 +13,5 @@ ReactDOM.render(
       <Game />
     </React.StrictMode>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

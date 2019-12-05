@@ -26,7 +26,8 @@ function Game(props) {
       </div>
 
       <p className={styles.howToPlayText}>
-        <span className={styles.boldText}>HOW TO PLAY</span>: Use your arrow keys or swipe to move the tiles. When two
+        <span className={styles.boldText}>HOW TO PLAY</span>
+: Use your arrow keys or swipe to move the tiles. When two
         tiles with the same number touch, they merge into one!
       </p>
 

@@ -1,6 +1,5 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react"],
-  "plugins": ["prettier"],
+  "extends": "airbnb",
   "rules": {
     "react/jsx-filename-extension": [
       1,
@@ -42,8 +41,7 @@
         }
       }
     ],
-    "no-use-before-define": ["error", { "functions": false, "classes": false, "variables": false }],
-    "prettier/prettier": "error"
+    "no-use-before-define": ["error", { "functions": false, "classes": false, "variables": false }]
   },
   "env": {
     "jest": true,

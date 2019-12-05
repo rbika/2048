@@ -7,7 +7,7 @@ import EndGamePanel from './EndGamePanel';
 
 function EndGamePanelContainer() {
   const dispatch = useDispatch();
-  const gameState = useSelector(state => state.game.gameState);
+  const gameState = useSelector((state) => state.game.gameState);
 
   const handleNewGameClick = useCallback(() => {
     dispatch(newGame());
