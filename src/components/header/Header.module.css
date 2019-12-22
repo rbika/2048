@@ -35,7 +35,6 @@
 .scoreContainer {
   min-width: 80px;
   text-align: center;
-  height: 45px;
   margin-left: 10px;
   display: flex;
   flex-direction: column;

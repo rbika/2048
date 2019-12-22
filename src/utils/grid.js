@@ -245,7 +245,7 @@ export const addTile = (grid, tile) => {
  * @returns {number[][]}
  */
 export const mergeTiles = (grid) => {
-  const updatedGrid = grid.map((row) => row.map((tile) => {
+  const updatedGrid = grid.map((gridRow) => gridRow.map((tile) => {
     if (tile && tile.mergeWithTile) {
       const { row, col, value } = tile;
       return generateTile(row, col, value * 2, TILE_ORIGINS.MERGE);

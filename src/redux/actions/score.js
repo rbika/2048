@@ -11,13 +11,6 @@ export const incrementScore = (value) => ({
 });
 
 /**
- * Sets the current score to 0 (zero)
- */
-export const resetScore = () => ({
-  type: actions.RESET_SCORE,
-});
-
-/**
  * Update best score
  *
  * @param {number} value

@@ -2,78 +2,33 @@ import {
   put, takeEvery, all, select,
 } from 'redux-saga/effects';
 
-import {
-  newTile, mergeTiles, updateGrid, setTilesMoving,
-} from './actions/tiles';
+import { mergeTiles } from './actions/tiles';
 import { gameOver, victory, checkEndGame } from './actions/game';
 import { incrementScore, updateBestScore } from './actions/score';
 import * as actions from './actions/action-types';
-import { GAME_STATES, GRID_SIZE } from '../constants';
+import { GAME_STATES } from '../constants';
 import * as gridUtils from '../utils/grid';
 
 const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
-function* newTileSaga() {
+function* moveTilesSaga() { // TODO rename to move start
   function* task() {
-    const grid = yield select((state) => state.tiles.grid);
-    if (grid.length) {
-      const tile = gridUtils.generateRandomTile(grid);
-      const updatedGrid = gridUtils.addTile(grid, tile);
-      yield put(updateGrid(updatedGrid));
-    }
-  }
-  yield takeEvery(actions.NEW_TILE, task);
-}
+    const { tilesMoving } = yield select((state) => state.tiles);
 
-function* newGameSaga() {
-  function* task() {
-    const grid = gridUtils.generateEmptyGrid(GRID_SIZE);
-    yield put(updateGrid(grid));
-    yield put(newTile());
-    yield put(newTile());
-  }
-  yield takeEvery(actions.NEW_GAME, task);
-}
-
-function* moveTilesSaga() {
-  function* task(action) {
-    const { grid, tilesMoving } = yield select((state) => state.tiles);
-    const gameState = yield select((state) => state.game.gameState);
-    const { newGrid, gridChanged } = gridUtils.moveTiles(grid, action.payload);
-    const endGame = gameState === GAME_STATES.VICTORY || gameState === GAME_STATES.GAME_OVER;
-
-    if (tilesMoving || endGame) return;
-
-    if (gridChanged) {
-      yield put(setTilesMoving(true));
-      yield put(updateGrid(newGrid));
-
-      yield sleep(150);
-      yield put(setTilesMoving(false));
-      yield put(mergeTiles());
-
-      yield put(newTile());
-      yield put(checkEndGame());
+    if (tilesMoving) {
+      yield sleep(150); // Move animation time
+      yield put(mergeTiles()); // TODO rename to move end
+      yield put(checkEndGame()); // TODO rename to check move results
     }
   }
   yield takeEvery(actions.MOVE_TILES, task);
 }
 
-function* mergeTilesSaga() {
-  function* task() {
-    const grid = yield select((state) => state.tiles.grid);
-    const updatedGrid = gridUtils.mergeTiles(grid);
-    const score = gridUtils.calculateMoveScore(updatedGrid);
-
-    yield put(updateGrid(updatedGrid));
-    yield put(incrementScore(score));
-  }
-  yield takeEvery(actions.MERGE_TILES, task);
-}
-
 function* checkEndGameSaga() {
   function* task() {
     const grid = yield select((state) => state.tiles.grid);
+    const score = gridUtils.calculateMoveScore(grid);
+    yield put(incrementScore(score));
     const gameState = yield select((state) => state.game.gameState);
     const { currentScore, bestScore } = yield select((state) => state.score);
 
@@ -105,7 +60,7 @@ function* getBestScoreSaga() {
     const bestScore = localStorage.getItem('bestScore');
 
     if (bestScore) {
-      yield put(updateBestScore(parseInt(bestScore)));
+      yield put(updateBestScore(parseInt(bestScore, 10)));
     }
   }
   yield takeEvery(actions.GET_BEST_SCORE, task);
@@ -113,10 +68,7 @@ function* getBestScoreSaga() {
 
 export default function* rootSaga() {
   yield all([
-    newGameSaga(),
     moveTilesSaga(),
-    mergeTilesSaga(),
-    newTileSaga(),
     checkEndGameSaga(),
     updateBestScoreSaga(),
     getBestScoreSaga(),
