@@ -36,7 +36,7 @@ const tilesReducer = (state = initialState, action) => {
       }
       return newState;
     }
-    case actions.MERGE_TILES: {
+    case actions.MOVE_TILES_END: {
       let grid = gridUtils.mergeTiles(state.grid);
       grid = addRandomTile(grid);
       return { ...state, tilesMoving: false, grid };

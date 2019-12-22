@@ -1,12 +1,9 @@
 export const NEW_GAME = '2048/NEW_GAME';
-export const VICTORY = '2048/VICTORY';
-export const GAME_OVER = '2048/GAME_OVER';
+export const END_GAME = '2048/END_GAME';
 export const KEEP_PLAYING = '2048/KEEP_PLAYING';
-export const CHECK_END_GAME = '2048/CHECK_END_GAME';
 
-export const INCREMENT_SCORE = '2048/INCREMENT_SCORE';
+export const UPDATE_SCORE = '2048/UPDATE_SCORE';
 export const UPDATE_BEST_SCORE = '2048/UPDATE_BEST_SCORE';
-export const GET_BEST_SCORE = '2048/GET_BEST_SCORE';
 
 export const MOVE_TILES = '2048/MOVE_TILES';
-export const MERGE_TILES = '2048/MERGE_TILES';
+export const MOVE_TILES_END = '2048/MOVE_TILES_END';

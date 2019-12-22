@@ -8,17 +8,11 @@ export const newGame = () => ({
 });
 
 /**
- * Ends the game when the player lose
+ * Ends the game
  */
-export const gameOver = () => ({
-  type: actions.GAME_OVER,
-});
-
-/**
- * Ends the game when the player win
- */
-export const victory = () => ({
-  type: actions.VICTORY,
+export const endGame = (payload) => ({
+  type: actions.NEW_GAME,
+  payload,
 });
 
 /**
@@ -26,11 +20,4 @@ export const victory = () => ({
  */
 export const keepPlaying = () => ({
   type: actions.KEEP_PLAYING,
-});
-
-/**
- * Checks if the player won or lost
- */
-export const checkEndGame = () => ({
-  type: actions.CHECK_END_GAME,
 });

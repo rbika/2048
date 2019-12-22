@@ -7,7 +7,6 @@ import { newGame } from '../../redux/actions/game';
 import { moveTiles } from '../../redux/actions/tiles';
 import { DIRECTIONS } from '../../constants';
 import Game from './Game';
-import { getBestScore } from '../../redux/actions/score';
 
 function GameContainer() {
   const gameState = useSelector((state) => state.game.gameState);
@@ -16,11 +15,6 @@ function GameContainer() {
   // Starts a new game
   useEffect(() => {
     dispatch(newGame());
-  }, []);
-
-  // Get best score from local storage
-  useEffect(() => {
-    dispatch(getBestScore());
   }, []);
 
   const handleSwipe = (e) => {

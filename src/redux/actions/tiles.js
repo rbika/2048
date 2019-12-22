@@ -13,6 +13,6 @@ export const moveTiles = (direction) => ({
 /**
  * Merges the tiles in the same cell
  */
-export const mergeTiles = () => ({
-  type: actions.MERGE_TILES,
+export const moveTilesEnd = () => ({
+  type: actions.MOVE_TILES_END,
 });

@@ -13,11 +13,8 @@ const gameReducer = (state = initialState, action) => {
     case actions.KEEP_PLAYING: {
       return { ...state, gameState: GAME_STATES.IN_PROGRESS_AFTER_VICTORY };
     }
-    case actions.GAME_OVER: {
-      return { ...state, gameState: GAME_STATES.GAME_OVER };
-    }
-    case actions.VICTORY: {
-      return { ...state, gameState: GAME_STATES.VICTORY };
+    case actions.END_GAME: {
+      return { ...state, gameState: action.payload.gameState };
     }
     default:
       return state;

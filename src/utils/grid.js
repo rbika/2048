@@ -133,19 +133,20 @@ export const hasAvailableMoves = (grid) => {
   }
 
   // Checks if there are adjacent cells with the same value
-  for (const tile of flatGrid) {
+  let result = false;
+  flatGrid.forEach((tile) => {
     const { row, col, value } = tile;
 
     if (row + 1 < gridSize && grid[row + 1][col].value === value) {
-      return true;
+      result = true;
     }
 
     if (col + 1 < gridSize && grid[row][col + 1].value === value) {
-      return true;
+      result = true;
     }
-  }
+  });
 
-  return false;
+  return result;
 };
 
 /**

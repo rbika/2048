@@ -8,14 +8,17 @@ const initialState = {
 const scoreReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.NEW_GAME: {
-      return { ...state, currentScore: 0 };
+      const savedBestScore = localStorage.getItem('bestScore');
+      const bestScore = savedBestScore ? parseInt(savedBestScore, 10) : 0;
+      return { ...state, bestScore, currentScore: 0 };
     }
-    case actions.INCREMENT_SCORE: {
+    case actions.UPDATE_SCORE: {
       const newScore = state.currentScore + action.payload;
       return { ...state, currentScore: newScore };
     }
-    case actions.UPDATE_BEST_SCORE: {
-      return { ...state, bestScore: action.payload };
+    case actions.END_GAME: {
+      localStorage.setItem('bestScore', action.payload.bestScore);
+      return { ...state, bestScore: action.payload.bestScore };
     }
     default:
       return state;
