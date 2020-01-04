@@ -11,37 +11,54 @@ const propTypes = {
   onKeepPlayingClick: PropTypes.func.isRequired,
 };
 
-const GameOverPanel = (props) => (
-  <div className={styles.endGamePanel}>
-    <h1>GAME OVER!</h1>
-    <button className={styles.panelBtn} onClick={props.onNewGameClick}>
-        Try Again
-    </button>
-  </div>
-);
+const GameOverPanel = (props) => {
+  const { onNewGameClick } = props;
 
-const VictoryPanel = (props) => (
-  <div className={styles.endGamePanel}>
-    <h1>YOU WIN!</h1>
-    <div>
-      <button className={styles.panelBtn} onClick={props.onKeepPlayingClick}>
-          Keep Playing
-      </button>
-      <button className={styles.panelBtn} onClick={props.onNewGameClick}>
+  return (
+    <div className={styles.endGamePanel}>
+      <h1>GAME OVER!</h1>
+      <button type="button" className={styles.panelBtn} onClick={onNewGameClick}>
           Try Again
       </button>
     </div>
-  </div>
-);
+  );
+};
+GameOverPanel.propTypes = {
+  onNewGameClick: PropTypes.func.isRequired,
+};
+
+const VictoryPanel = (props) => {
+  const { onKeepPlayingClick, onNewGameClick } = props;
+
+  return (
+    <div className={styles.endGamePanel}>
+      <h1>YOU WIN!</h1>
+      <div>
+        <button type="button" className={styles.panelBtn} onClick={onKeepPlayingClick}>
+            Keep Playing
+        </button>
+        <button type="button" className={styles.panelBtn} onClick={onNewGameClick}>
+            Try Again
+        </button>
+      </div>
+    </div>
+  );
+};
+VictoryPanel.propTypes = {
+  onKeepPlayingClick: PropTypes.func.isRequired,
+  onNewGameClick: PropTypes.func.isRequired,
+};
 
 function EndGamePanel(props) {
-  const { onNewGameClick, onKeepPlayingClick } = props;
+  const { onNewGameClick, onKeepPlayingClick, gameState } = props;
   let content = null;
 
-  if (props.gameState === GAME_STATES.GAME_OVER) {
+  if (gameState === GAME_STATES.GAME_OVER) {
     content = <GameOverPanel onNewGameClick={onNewGameClick} />;
-  } else if (props.gameState === GAME_STATES.VICTORY) {
-    content = <VictoryPanel onNewGameClick={onNewGameClick} onKeepPlayingClick={onKeepPlayingClick} />;
+  } else if (gameState === GAME_STATES.VICTORY) {
+    content = (
+      <VictoryPanel onNewGameClick={onNewGameClick} onKeepPlayingClick={onKeepPlayingClick} />
+    );
   }
 
   return <div className={styles.container}>{content}</div>;

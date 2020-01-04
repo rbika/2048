@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { flatten } from 'lodash';
 
 import { moveTiles } from '../../redux/actions/tiles';
 import { ARROWS } from '../../constants';
@@ -10,18 +9,18 @@ import Board from './Board';
 const BoardContainer = () => {
   const dispatch = useDispatch();
   const tiles = useSelector((state) => {
-    const tiles = [];
-    flatten(state.tiles.grid).forEach((tile) => {
+    const array = [];
+    state.tiles.grid.flat().forEach((tile) => {
       if (tile) {
-        tiles.push(tile);
+        array.push(tile);
 
         if (tile.mergeWithTile) {
-          tiles.push(tile.mergeWithTile);
+          array.push(tile.mergeWithTile);
         }
       }
     });
 
-    return tiles.sort((tile1, tile2) => (tile1.id > tile2.id ? 1 : -1));
+    return array.sort((tile1, tile2) => (tile1.id > tile2.id ? 1 : -1));
   });
 
   // Add keypress event listener

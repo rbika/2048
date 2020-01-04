@@ -7,7 +7,10 @@ import { GRID_SIZE } from '../../constants';
 import styles from './Board.module.css';
 
 const propTypes = {
-  tiles: PropTypes.array.isRequired,
+  tiles: PropTypes.arrayOf(PropTypes.shape({
+    grid: PropTypes.array,
+    tilesMoving: PropTypes.bool,
+  })).isRequired,
 };
 
 const BoardGrid = () => {
@@ -44,6 +47,8 @@ const Tiles = (props) => {
     </div>
   );
 };
+
+Tiles.propTypes = propTypes;
 
 function Board(props) {
   const { tiles } = props;

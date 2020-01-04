@@ -34,7 +34,7 @@ function Header(props) {
         </div>
 
         <div className={styles.buttonsContainer}>
-          <button className={styles.newGameBtn} onClick={onNewGameClick}>
+          <button type="button" className={styles.newGameBtn} onClick={onNewGameClick}>
             New Game
           </button>
           {/* <button className={styles.undoBtn} onClick={onNewGameClick}>
