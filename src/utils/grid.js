@@ -174,8 +174,7 @@ export const generateTile = (row, col, value, origin) => {
 };
 
 /**
- * Creates a tile object with random value and random position
- * The value may be 2 or 4 and the position randomly picked empty cell
+ * Creates a tile object with random value (2 or 4) and random position
  *
  * @param {number[][]} grid
  * @returns {Object}

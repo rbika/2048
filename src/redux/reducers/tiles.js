@@ -22,23 +22,19 @@ const tilesReducer = (state = initialState, action) => {
       return { ...state, grid };
     }
     case actions.MOVE_TILES: {
-      let newState;
-      if (state.tilesMoving) {
-        newState = state;
-      } else {
-        const { newGrid, gridChanged } = gridUtils.moveTiles(state.grid, action.payload);
-
-        if (!gridChanged) {
-          newState = state;
-        } else {
-          newState = { ...state, tilesMoving: true, grid: newGrid };
-        }
+      const { newGrid, gridChanged } = gridUtils.moveTiles(state.grid, action.payload);
+      if (!gridChanged) {
+        return state;
       }
-      return newState;
+      return { ...state, tilesMoving: true, grid: newGrid };
     }
     case actions.MOVE_TILES_END: {
       let grid = gridUtils.mergeTiles(state.grid);
-      grid = addRandomTile(grid);
+
+      if (grid.flat().some((value) => value === null)) {
+        grid = addRandomTile(grid);
+      }
+
       return { ...state, tilesMoving: false, grid };
     }
     default:

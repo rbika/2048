@@ -13,12 +13,8 @@ const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
 function* moveTilesSaga() {
   function* task() {
-    const { tilesMoving } = yield select((state) => state.tiles);
-
-    if (tilesMoving) {
-      yield sleep(150); // Move animation time
-      yield put(moveTilesEnd());
-    }
+    yield sleep(150); // Move animation time
+    yield put(moveTilesEnd());
   }
   yield takeEvery(actions.MOVE_TILES, task);
 }
