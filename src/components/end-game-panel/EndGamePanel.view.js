@@ -18,7 +18,7 @@ const GameOverPanel = (props) => {
     <div className={styles.endGamePanel}>
       <h1>GAME OVER!</h1>
       <button type="button" className={styles.panelBtn} onClick={onNewGameClick}>
-          Try Again
+        Try Again
       </button>
     </div>
   );
@@ -35,10 +35,10 @@ const VictoryPanel = (props) => {
       <h1>YOU WIN!</h1>
       <div>
         <button type="button" className={styles.panelBtn} onClick={onKeepPlayingClick}>
-            Keep Playing
+          Keep Playing
         </button>
         <button type="button" className={styles.panelBtn} onClick={onNewGameClick}>
-            Try Again
+          Try Again
         </button>
       </div>
     </div>
@@ -49,7 +49,7 @@ VictoryPanel.propTypes = {
   onNewGameClick: PropTypes.func.isRequired,
 };
 
-function EndGamePanel(props) {
+function EndGamePanelView(props) {
   const { onNewGameClick, onKeepPlayingClick, gameState } = props;
   let content = null;
 
@@ -64,5 +64,5 @@ function EndGamePanel(props) {
   return <div className={styles.container}>{content}</div>;
 }
 
-EndGamePanel.propTypes = propTypes;
-export default EndGamePanel;
+EndGamePanelView.propTypes = propTypes;
+export default EndGamePanelView;

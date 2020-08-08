@@ -1,12 +1,15 @@
 // Tile needed to win the game
 export const VICTORY_TILE = 2048;
 
+// Duration of the movement animation (in miliseconds)
+export const MOVE_ANIMATION = 150;
+
 // Game states
 export const GAME_STATES = {
   IN_PROGRESS: 'IN_PROGRESS',
   VICTORY: 'VICTORY',
   GAME_OVER: 'GAME_OVER',
-  IN_PROGRESS_AFTER_VICTORY: 'IN_PROGRESS_AFTER_VICTORY',
+  ENDLESS_MODE: 'ENDLESS_MODE',
 };
 
 // Board grid size

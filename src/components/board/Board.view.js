@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { GRID_SIZE } from '../../constants';
+import { GRID_SIZE, MOVE_ANIMATION } from '../../constants';
 import styles from './Board.module.css';
 
 const propTypes = {
@@ -30,6 +30,7 @@ const Tiles = (props) => {
       {tiles.map((tile) => {
         const positionStyles = {
           transform: `translate(${tile.col * (75 + 10)}px, ${tile.row * (75 + 10)}px)`,
+          transition: `all ${MOVE_ANIMATION / 1000}s ease`,
         };
 
         const classes = classNames(styles.tile, {
@@ -50,7 +51,7 @@ const Tiles = (props) => {
 
 Tiles.propTypes = propTypes;
 
-function Board(props) {
+function BoardView(props) {
   const { tiles } = props;
 
   return (
@@ -61,5 +62,5 @@ function Board(props) {
   );
 }
 
-Board.propTypes = propTypes;
-export default Board;
+BoardView.propTypes = propTypes;
+export default BoardView;

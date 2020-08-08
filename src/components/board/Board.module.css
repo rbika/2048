@@ -32,7 +32,6 @@
 }
 
 .tileContainer {
-  transition: all 0.15s ease;
   position: absolute;
   width: 75px;
   height: 75px;

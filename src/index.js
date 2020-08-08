@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Provider } from 'react-redux';
-import store from './redux/store';
-
 import Game from './pages/game';
+import GameContextProvider from './contexts/GameContext';
 import './index.css';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
+  <React.StrictMode>
+    <GameContextProvider>
       <Game />
-    </React.StrictMode>
-  </Provider>,
+    </GameContextProvider>
+  </React.StrictMode>,
   document.getElementById('root'),
 );

@@ -1,9 +1,0 @@
-export const NEW_GAME = '2048/NEW_GAME';
-export const END_GAME = '2048/END_GAME';
-export const KEEP_PLAYING = '2048/KEEP_PLAYING';
-
-export const UPDATE_SCORE = '2048/UPDATE_SCORE';
-export const UPDATE_BEST_SCORE = '2048/UPDATE_BEST_SCORE';
-
-export const MOVE_TILES = '2048/MOVE_TILES';
-export const MOVE_TILES_END = '2048/MOVE_TILES_END';

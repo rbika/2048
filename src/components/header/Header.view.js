@@ -10,7 +10,7 @@ const propTypes = {
   onNewGameClick: PropTypes.func.isRequired,
 };
 
-function Header(props) {
+function HeaderView(props) {
   const { score, bestScore, onNewGameClick } = props;
 
   return (
@@ -37,14 +37,11 @@ function Header(props) {
           <button type="button" className={styles.newGameBtn} onClick={onNewGameClick}>
             New Game
           </button>
-          {/* <button className={styles.undoBtn} onClick={onNewGameClick}>
-            Undo
-          </button> */}
         </div>
       </div>
     </div>
   );
 }
 
-Header.propTypes = propTypes;
-export default Header;
+HeaderView.propTypes = propTypes;
+export default HeaderView;
