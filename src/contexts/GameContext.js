@@ -87,6 +87,7 @@ const reducer = (state, action) => {
     return {
       ...state,
       grid: newGrid,
+      tilesMoving: true,
     };
   }
 
@@ -97,6 +98,7 @@ const reducer = (state, action) => {
       ...state,
       grid,
       currentScore: score,
+      tilesMoving: false,
     };
   }
 
